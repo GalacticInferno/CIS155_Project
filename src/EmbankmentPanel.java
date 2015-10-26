@@ -6,8 +6,13 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class EmbankmentPanel extends JPanel
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class EmbankmentPanel extends JPanel implements MouseListener
 {
+	private DrawCannonBall dcb = new DrawCannonBall();
+	
 	// Window Dimensions
 	final int WIDTH = 1280;
 	final int LENGTH = 896;
@@ -15,9 +20,45 @@ public class EmbankmentPanel extends JPanel
 	// Constructor for Embankment Panel
 	public EmbankmentPanel()
 	{
+		DrawCannonBall dcb = new DrawCannonBall();
+		
+		System.out.println("Panel...");
 		// Sets the background color
 		setBackground(Color.BLACK);
 		// Sets the dimensions for the window
-		setPreferredSize(new Dimension(WIDTH, LENGTH));
+		setPreferredSize(new Dimension(WIDTH, LENGTH));	
+		addMouseListener(this);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) 
+	{
+		System.out.println("mouseClicked...");
+		dcb.mouseClicked(e);
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
