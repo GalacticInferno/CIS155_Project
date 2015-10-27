@@ -11,6 +11,8 @@ import java.awt.event.MouseListener;
 
 public class EmbankmentPanel extends JPanel implements MouseListener
 {
+	private static final long serialVersionUID = 1L;
+
 	private DrawCannonBall dcb = new DrawCannonBall();
 	
 	// Window Dimensions
@@ -19,9 +21,7 @@ public class EmbankmentPanel extends JPanel implements MouseListener
 	
 	// Constructor for Embankment Panel
 	public EmbankmentPanel()
-	{
-		DrawCannonBall dcb = new DrawCannonBall();
-		
+	{	
 		System.out.println("Panel...");
 		// Sets the background color
 		setBackground(Color.BLACK);
@@ -30,12 +30,14 @@ public class EmbankmentPanel extends JPanel implements MouseListener
 		addMouseListener(this);
 	}
 
+	// Currently a temporary holder for the creation of cannonballs
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
 		System.out.println("mouseClicked...");
-		dcb.mouseClicked(e);
 		
+		Graphics g = this.getGraphics();
+		dcb.drawCircle(e.getX(), e.getY(), g);
 	}
 
 	@Override

@@ -1,70 +1,32 @@
+/* What: 			Draws the "Cannonballs" onto screen
+ * Class created: 	2015-10-27 by Cody Beaty
+ * Edit(s):				
+ * Notes:			Created on mouse is only temporary untill we get the Keys working
+*/
+
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
 
 
-public class DrawCannonBall extends JFrame implements ActionListener, MouseListener 
+public class DrawCannonBall extends JFrame
 {
+	private static final long serialVersionUID = 1L;
+	
+	final int PIXELSMALL = 16;
+	final int PIXELOFFSET = 8;
+	
 	int x, y;
 	
-	public void drawCircle(int x, int y)
+	public void drawCircle(int x, int y, Graphics g)
 	{
 		System.out.println("X: " + x + " Y: " + y);
 		
-		Graphics g = this.getGraphics();
-		g.drawOval(x, y, 100, 100);
-		g.setColor(Color.CYAN);
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) 
-	{
-		System.out.println("Draw...");
+		// Draws a "Brown Cannonball" at the point in which the mouse clicks
+		g.setColor(Color.ORANGE.darker());
+		// PXELOFFSET is used to center the circle on the point of the mouse click
+		g.fillOval(x - PIXELOFFSET, y - PIXELOFFSET, PIXELSMALL, PIXELSMALL);
+		g.drawOval(x - PIXELOFFSET, y - PIXELOFFSET, PIXELSMALL, PIXELSMALL);
 		
-		x = e.getX();
-		y = e.getY();
-		
-		drawCircle(x,y);
-	}
-	
-	@Override
-	public void mouseEntered(MouseEvent e) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mousePressed(MouseEvent e) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}	
 }
