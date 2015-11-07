@@ -15,7 +15,7 @@ class start
     
     private long window;   
     int WIDTH = 1280;
-    int HEIGHT = 896;
+    int HEIGHT = 992;
     
     GameLoop game = new GameLoop();
  
