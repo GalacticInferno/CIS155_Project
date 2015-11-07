@@ -18,6 +18,7 @@ public class Cursor_B
     public int y;
     public int sizex;
     public int sizey;
+	public int keyPressed;
 	
 	public Cursor_B(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -33,10 +34,41 @@ public class Cursor_B
 		texture = bitmapobjectstextures.Cursor_B_tex;
 	}
 	
-	public void update()
+	public void update(int key)
 	{
+		/*
+		 * KEY MAPP
+		 * 0 = no key pressed
+		 * 87 = W
+		 * 68 = d
+		 * 83 = s
+		 * 65 = a
+		 * 81 = q
+		 * 69 = e
+		 */
+		keyPressed = key;
+		switch(keyPressed){
+		case 0:
+			break;
+		case 87:
+			y -= 32;
+			break;
+		case 68:
+			x += 32;
+			break;
+		case 83:
+			y += 32;
+			break;
+		case 65:
+			x -= 32;
+			break;
+		case 81:
+			break;
+		case 69:
+			break;
 		
-	}
+		}
+	} 
 	
 	public void draw()
     {
