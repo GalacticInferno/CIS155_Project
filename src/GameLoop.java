@@ -1,11 +1,39 @@
 
 //This Defines the Drawn objects, first time load objects, and contains game run code.
 
+//import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+//import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
+import static org.lwjgl.glfw.GLFW.*;
+//import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+//import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
+//import static org.lwjgl.opengl.GL11.GL_TRUE;
+import static org.lwjgl.opengl.GL11.GL_TRUE;
+
 import java.util.ArrayList;
+
+import org.lwjgl.glfw.GLFWKeyCallback;
 
 
 public class GameLoop 
-{
+{	
+	// creates input as a KeyEvent class
+	private int keyPressed = 0;
+	// TIMING MOVEMENT for ALL players 
+	// NOTE HERE: player moves every 0.25 second -- change movSpeed to change movement speed (for all players)
+	int  movSpeed = 250;
+	long startTime_P1_move;
+	long endTime_P1_move = System.currentTimeMillis();
+	long startTime_P2_move;
+	long endTime_P2_move = System.currentTimeMillis();
+	long startTime_P3_move;
+	long endTime_P3_move = System.currentTimeMillis();
+	// TIMING rotation of WALLs for ALL players (uses the same value for movement speed) NOTE: can be changed by adding a new int value.
+	long startTime_P1_rotate;
+	long endTime_P1_rotate = System.currentTimeMillis();
+	long startTime_P2_rotate;
+	long endTime_P2_rotate = System.currentTimeMillis();
+	long startTime_P3_rotate;
+	long endTime_P3_rotate = System.currentTimeMillis();
 	//Main Background
 	ArrayList<World> World = new ArrayList<World>();
 	
@@ -295,10 +323,14 @@ public class GameLoop
 
 	}
 	
-	public void update()
+	public void update(long window)
 	{	
 		//Put All game code here!!!
 		
+		keyInput(window); // scan for input
+		
+
+		//Cur_B.get(0).update();
 		
 		Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
 		Cannonball_N.remove(0);
@@ -309,4 +341,294 @@ public class GameLoop
 		Cannonball_R.add(new Cannonball_R(32, 96, 1, 1));
 		Cannonball_R.remove(0);
 	}
+
+// Scan input for all Players.
+void keyInput(long window) {
+	final GLFWKeyCallback   key_Callback;
+	glfwSetKeyCallback(window, key_Callback = new GLFWKeyCallback() 
+    {
+        public void invoke(long window, int key, int scancode, int action, int mods) {
+        	// PLAYER ONE
+        	// move up
+            if ( key == GLFW_KEY_W && action == GLFW_PRESS ) 
+            {
+            	startTime_P1_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P1_move < startTime_P1_move) 
+            	{    
+	            	Cur_B.get(0).update(key);
+	            	endTime_P1_move = System.currentTimeMillis();
+            	}
+            }
+            // move right
+             if ( key == GLFW_KEY_D && action == GLFW_PRESS )
+             {    
+            	startTime_P1_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P1_move < startTime_P1_move) 
+            	{
+	            	Cur_B.get(0).update(key);
+	            	endTime_P1_move = System.currentTimeMillis();
+	            	
+            	}
+        	}
+             // move down
+             if ( key == GLFW_KEY_S && action == GLFW_PRESS ) 
+             {    
+            	startTime_P1_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P1_move < startTime_P1_move) 
+            	{
+	            	Cur_B.get(0).update(key);
+	            	endTime_P1_move = System.currentTimeMillis();
+            	}
+            }
+             //move left
+             if ( key == GLFW_KEY_A && action == GLFW_PRESS )
+             {     
+            	startTime_P1_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P1_move < startTime_P1_move) 
+            	{	
+	            	Cur_B.get(0).update(key);
+	            	endTime_P1_move = System.currentTimeMillis();
+            	}
+            }
+          // Rotate the WALL uses different timer than movement. -->> rotate while moving NOTE: (not implemented)
+            if ( key == GLFW_KEY_Q && action == GLFW_PRESS )
+            { 
+            		startTime_P1_rotate = System.currentTimeMillis();
+            		
+            		if (movSpeed+endTime_P1_rotate < startTime_P1_rotate) 
+            		{
+		            	Cur_B.get(0).update(key);
+		            	endTime_P1_rotate = System.currentTimeMillis();
+            		}
+	            
+            }
+            // E for placing WALL is not timed and therefore can be placed at any time.
+            if ( key == GLFW_KEY_E && action == GLFW_PRESS )
+            { 
+	            	Cur_B.get(0).update(key);
+            }
+            
+            // IF KEY IS RELEASED NOTE: this might needs adjustment -->> more testing
+            if ( key != GLFW_KEY_W /*&& action == GLFW_RELEASE*/ ) 
+            {
+            	Cur_B.get(0).update(0);
+            }
+            if ( key != GLFW_KEY_D /*&& action == GLFW_RELEASE */)
+            {
+            	Cur_B.get(0).update(0);
+        	}
+            if ( key != GLFW_KEY_S /*&& action == GLFW_RELEASE */) 
+            {
+            	Cur_B.get(0).update(0);
+            }
+            if ( key != GLFW_KEY_A /*&& action == GLFW_RELEASE*/ )
+            {
+            	Cur_B.get(0).update(0);
+            }
+            if ( key == GLFW_KEY_Q && action == GLFW_RELEASE )
+            {
+            	Cur_B.get(0).update(0);
+            }
+            if ( key == GLFW_KEY_E && action == GLFW_RELEASE )
+            {
+            	Cur_B.get(0).update(0);
+            } // END OF PLAYER ONE
+            
+            // PLAYER 2
+            // move up
+            if ( key == GLFW_KEY_T && action == GLFW_PRESS ) 
+            {
+            	startTime_P2_move = System.currentTimeMillis();
+            	if (movSpeed+endTime_P2_move < startTime_P2_move) 
+            	{
+	            	Cur_O.get(0).update(key);
+	            	endTime_P2_move = System.currentTimeMillis();
+            	}
+            }
+            // move right
+             if ( key == GLFW_KEY_H && action == GLFW_PRESS )
+             {
+            	startTime_P2_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P2_move < startTime_P2_move) 
+            	{
+	            	Cur_O.get(0).update(key);
+	            	endTime_P2_move = System.currentTimeMillis();
+	            	
+            	}
+        	}
+             // move down
+             if ( key == GLFW_KEY_G && action == GLFW_PRESS ) 
+             {
+            	startTime_P2_move = System.currentTimeMillis();   
+            	
+            	if (movSpeed+endTime_P2_move < startTime_P2_move) 
+            	{
+	            	Cur_O.get(0).update(key);
+	            	endTime_P2_move = System.currentTimeMillis();
+            	}
+            }
+             // move left
+             if ( key == GLFW_KEY_F && action == GLFW_PRESS )
+             {
+            	startTime_P2_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P2_move < startTime_P2_move) 
+            	{	       
+	            	Cur_O.get(0).update(key);
+	            	endTime_P2_move = System.currentTimeMillis();
+            	}
+            }
+            // Rotate the WALL uses different timer than movement.
+            if ( key == GLFW_KEY_R && action == GLFW_PRESS )
+            { 	
+            		startTime_P2_rotate = System.currentTimeMillis();
+            		
+            		if (movSpeed+endTime_P2_rotate < startTime_P2_rotate) 
+            		{
+		            	Cur_O.get(0).update(key);
+		            	endTime_P2_rotate = System.currentTimeMillis();
+            		}
+	            
+            }
+            // E for placing WALL is not timed and therefore can be placed at any time.
+            if ( key == GLFW_KEY_Y && action == GLFW_PRESS )
+            { 
+	            	Cur_O.get(0).update(key);
+            }
+            
+            // IF KEY IS RELEASED --> NOTE: adjustment might be needed
+            if ( key != GLFW_KEY_T /*&& action == GLFW_RELEASE*/ ) 
+            {
+            	Cur_O.get(0).update(0);
+            }
+            if ( key != GLFW_KEY_H /*&& action == GLFW_RELEASE */)
+            {
+            	Cur_O.get(0).update(0);
+        	}
+            if ( key != GLFW_KEY_G /*&& action == GLFW_RELEASE */) 
+            {
+            	Cur_O.get(0).update(0);
+            }
+            if ( key != GLFW_KEY_F /*&& action == GLFW_RELEASE*/ )
+            {
+            	Cur_O.get(0).update(0);
+            }
+            if ( key == GLFW_KEY_R && action == GLFW_RELEASE )
+            {
+            	Cur_O.get(0).update(0);
+            }
+            if ( key == GLFW_KEY_Y && action == GLFW_RELEASE )
+            {            	
+            	Cur_O.get(0).update(0);
+            }// END OF PLAYER TWO
+            
+            // player 3
+            // move up
+            if ( key == GLFW_KEY_I && action == GLFW_PRESS )  
+            {
+            	startTime_P3_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P3_move < startTime_P3_move) 
+            	{
+	            	Cur_R.get(0).update(key);
+	            	endTime_P3_move = System.currentTimeMillis();
+            	}
+            }
+            //move right
+             if ( key == GLFW_KEY_L && action == GLFW_PRESS )
+             {  
+            	startTime_P3_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P3_move < startTime_P3_move) 
+            	{
+	            	Cur_R.get(0).update(key);
+	            	endTime_P3_move = System.currentTimeMillis();
+	            	
+            	}
+        	}
+             //move down
+             if ( key == GLFW_KEY_K && action == GLFW_PRESS ) 
+             { 
+            	startTime_P3_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P3_move < startTime_P3_move) 
+            	{
+	            	Cur_R.get(0).update(key);
+	            	endTime_P3_move = System.currentTimeMillis();
+            	}
+            }
+             // move left
+             if ( key == GLFW_KEY_J && action == GLFW_PRESS )
+             {  
+            	startTime_P3_move = System.currentTimeMillis();
+            	
+            	if (movSpeed+endTime_P3_move < startTime_P3_move) 
+            	{	
+	            	Cur_R.get(0).update(key);
+	            	endTime_P3_move = System.currentTimeMillis();
+            	}
+            }
+             // Rotate the WALL uses different timer than movement.
+            if ( key == GLFW_KEY_U && action == GLFW_PRESS )
+            {             	
+            		startTime_P3_rotate = System.currentTimeMillis();
+            		
+            		if (movSpeed+endTime_P3_rotate < startTime_P3_rotate) 
+            		{
+		            	Cur_R.get(0).update(key);
+		            	endTime_P3_rotate = System.currentTimeMillis();
+            		}
+	            
+            }
+            // E for placing WALL is not timed and therefore can be placed at any time.
+            if ( key == GLFW_KEY_O && action == GLFW_PRESS )
+            { 
+	            	Cur_R.get(0).update(key);
+            }
+            
+            // IF KEY IS RELEASED SAME as player 1 & 2
+            if ( key != GLFW_KEY_I /*&& action == GLFW_RELEASE*/ ) 
+            {
+            	Cur_R.get(0).update(0);
+            }
+            if ( key != GLFW_KEY_L /*&& action == GLFW_RELEASE */)
+            {            	
+            	Cur_R.get(0).update(0);                 	
+        	}
+            if ( key != GLFW_KEY_K /*&& action == GLFW_RELEASE */) 
+            {            	
+            	Cur_R.get(0).update(0);
+            }
+            if ( key != GLFW_KEY_J /*&& action == GLFW_RELEASE*/ )
+            {            	
+            	Cur_R.get(0).update(0);
+            }
+            if ( key == GLFW_KEY_U && action == GLFW_RELEASE )
+            {            	
+            	Cur_R.get(0).update(0);
+            }
+            if ( key == GLFW_KEY_O && action == GLFW_RELEASE )
+            {            	
+            	Cur_R.get(0).update(0);
+            } // END OF PLAYER THREE
+            
+            
+            
+            
+            //TEMP FIX FOR CLOSING THE WINDOW --- my key inputs disabled the ESC button in openglstartfile.java
+            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE ) // only needed for playerOne!
+                glfwSetWindowShouldClose(window, GL_TRUE);
+        } // end of invoke keyevents
+        	
+    });
+}
+
+
+
+
 }

@@ -12,7 +12,7 @@ class start
 {
     private GLFWErrorCallback errorCallback;
     private GLFWKeyCallback   keyCallback;
-
+    
     private long window;   
     int WIDTH = 1280;
     int HEIGHT = 896;
@@ -88,12 +88,17 @@ class start
     	
     	 while ( glfwWindowShouldClose(window)  == GL_FALSE) 
         {
+    		
             glClear(GL_COLOR_BUFFER_BIT); 
-            game.update();
+            game.update(window);
             game.draw();
 
             glfwSwapBuffers(window);
             glfwPollEvents();
+            
+            	
+
+            
         }
     } 
     
