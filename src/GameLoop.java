@@ -187,8 +187,8 @@ public class GameLoop
 		Ball.add(new Ball(480, 64, 0, 0));
 		Cannonball_N.add(new Cannonball_N(480, 64, 0, 0));
 		//Cannonball_B.add(new Cannonball_B(480, 64, 0, 0));
-		Cannonball_O.add(new Cannonball_O(480, 64, 0, 0));
-		Cannonball_R.add(new Cannonball_R(480, 64, 0, 0));
+		//Cannonball_O.add(new Cannonball_O(480, 64, 0, 0));
+		//Cannonball_R.add(new Cannonball_R(480, 64, 0, 0));
 	}
 	
 	public void draw()
@@ -365,7 +365,7 @@ public class GameLoop
 		{
 			Cannonball_R.get(i).update();
 		}
-		// removes the blue ball when target is hit
+		// removes the red ball when target is hit
 		cannonball_R_remove(Cannonball_R.size());
 		//----------------------END RED----------
 		
@@ -376,7 +376,7 @@ public class GameLoop
 		{
 			Cannonball_O.get(i).update();
 		}
-		// removes the blue ball when target is hit
+		// removes the orange ball when target is hit
 		cannonball_O_remove(Cannonball_O.size());
 		//-----------END ORANGE -------
 		
