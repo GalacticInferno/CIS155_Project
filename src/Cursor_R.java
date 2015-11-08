@@ -50,16 +50,24 @@ public class Cursor_R
 		case 0:
 			break;
 		case 73:
-			y -= 32;
+			if (y > 16) {
+				y -= 32;
+			}
 			break;
 		case 76:
-			x += 32;
+			if (x < 1248) {
+				x += 32;
+			}
 			break;
 		case 75:
-			y += 32;
+			if (y<864){
+				y += 32;
+			}
 			break;
 		case 74:
-			x -= 32;
+			if(x>16){
+				x -= 32;
+			}
 			break;
 		case 85:
 			break;

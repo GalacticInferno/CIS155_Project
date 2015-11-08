@@ -2,11 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="D:/Workplace/CIS155_Project/lwjgl.jar">
+	<classpathentry kind="lib" path="F:/UFV/CIS155_Project/lwjgl.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="CIS155_Project/native"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Workplace/CIS155_Project/PNGDecoder.jar"/>
+	<classpathentry kind="lib" path="F:/UFV/CIS155_Project/PNGDecoder.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

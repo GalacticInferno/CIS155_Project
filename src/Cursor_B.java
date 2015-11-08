@@ -47,33 +47,47 @@ public class Cursor_B
 		 * 69 = e
 		 */
 		keyPressed = key;
-		switch(keyPressed){
-		case 0:
-			break;
-		case 87:
-			y -= 32;
-			break;
-		case 68:
-			x += 32;
-			break;
-		case 83:
-			y += 32;
-			break;
-		case 65:
-			x -= 32;
-			break;
-		case 81:
-			break;
-		case 69:
-			break;
-		
-		}
+			switch(keyPressed){
+			case 0:
+				break;
+			case 87:
+				if (y > 16) {
+					y -= 32;
+				}
+				break;
+			case 68:
+				if (x < 1248) {
+					x += 32;
+				}
+				break;
+			case 83:
+				if (y<864){
+					y += 32;
+				}
+				break;
+			case 65:
+				if(x>16){
+					x -= 32;
+				}
+				break;
+			case 81:
+				break;
+			case 69:
+				break;
+			
+			}
 	} 
 	
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);
     }
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
     
 	private void square(int x , int y , int sizex, int sizey)
     {
