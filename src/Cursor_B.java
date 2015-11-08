@@ -19,6 +19,11 @@ public class Cursor_B
     public int sizex;
     public int sizey;
 	public int keyPressed;
+	public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
 	
 	public Cursor_B(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -51,23 +56,23 @@ public class Cursor_B
 			case 0:
 				break;
 			case 87:
-				if (y > 16) {
-					y -= 32;
+				if (y > yTop) {
+					y -= moveSpeed;
 				}
 				break;
 			case 68:
-				if (x < 1248) {
-					x += 32;
+				if (x < xRight) {
+					x += moveSpeed;
 				}
 				break;
 			case 83:
-				if (y<864){
-					y += 32;
+				if (y<yBottom){
+					y += moveSpeed;
 				}
 				break;
 			case 65:
-				if(x>16){
-					x -= 32;
+				if(x>xLeft){
+					x -= moveSpeed;
 				}
 				break;
 			case 81:
