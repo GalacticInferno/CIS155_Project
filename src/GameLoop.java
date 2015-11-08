@@ -34,6 +34,20 @@ public class GameLoop
 	long endTime_P2_rotate = System.currentTimeMillis();
 	long startTime_P3_rotate;
 	long endTime_P3_rotate = System.currentTimeMillis();
+	// TIMING CANNONBALL
+	long startTime_P1_ball;
+	long endTime_P1_ball = System.currentTimeMillis();
+	long startTime_P2_ball;
+	long endTime_P2_ball = System.currentTimeMillis();
+	long startTime_P3_ball;
+	long endTime_P3_ball = System.currentTimeMillis();
+	// Count cannon - > needed to prevent updating the destination of the cannon ball
+	int countBall_B = 0;
+	int countBall_R = 0;
+	int countBall_O = 0;
+	int getBallCount = 0;
+	// how fast the cannon balls are created. ( shots per time).
+	int ballCreation = 2500;
 	//Main Background
 	ArrayList<World> World = new ArrayList<World>();
 	
@@ -153,6 +167,7 @@ public class GameLoop
 		Cas_O.add(new Castle_O(128, 0, 0, 0));
 		Cas_N.add(new Castle_N(192, 0, 0, 0));
 		Can_B.add(new Cannon_B(256, 0, 0, 0));
+		Can_B.add(new Cannon_B(456, 456, 0, 0));
 		Can_R.add(new Cannon_R(320, 0, 0, 0));
 		Can_O.add(new Cannon_O(384, 0, 0, 0));
 		Can_N.add(new Cannon_N(448, 0, 0, 0));
@@ -171,7 +186,7 @@ public class GameLoop
 		Bil_O.add(new Build_O(320, 64, 0, 0));
 		Ball.add(new Ball(480, 64, 0, 0));
 		Cannonball_N.add(new Cannonball_N(480, 64, 0, 0));
-		Cannonball_B.add(new Cannonball_B(480, 64, 0, 0));
+		//Cannonball_B.add(new Cannonball_B(480, 64, 0, 0));
 		Cannonball_O.add(new Cannonball_O(480, 64, 0, 0));
 		Cannonball_R.add(new Cannonball_R(480, 64, 0, 0));
 	}
@@ -322,26 +337,59 @@ public class GameLoop
 		}
 
 	}
-	
+	// ---------------------------------- GAME LOOP --------------------------------------
+	//Put All game code here!!!
 	public void update(long window)
 	{	
-		//Put All game code here!!!
+		// get start time for timing shooting.
+		startTime_P1_ball = System.currentTimeMillis();
+		startTime_P2_ball = System.currentTimeMillis();
+		startTime_P3_ball = System.currentTimeMillis();
 		
 		keyInput(window); // scan for input
+		//------BLUE-----------
+		cannonball_B(Can_B.size());   // counts and creates blue cannon and shots to destination (destination is set by player cursor)
+		// updates the cannonball array for BLUE
+		for (int i = 0; i < Cannonball_B.size() ; i++)
+		{
+			Cannonball_B.get(i).update();
+		}
+		// removes the blue ball when target is hit
+		cannonball_B_remove(Cannonball_B.size());
+		//-------------END BLUE-----------
 		
-
-		//Cur_B.get(0).update();
+		//-----------------------RED-----------
+		cannonball_R(Can_R.size());   // counts and creates red cannon and shots to destination (destination is set by player cursor)
+		// updates the cannonball array for red
+		for (int i = 0; i < Cannonball_R.size() ; i++)
+		{
+			Cannonball_R.get(i).update();
+		}
+		// removes the blue ball when target is hit
+		cannonball_R_remove(Cannonball_R.size());
+		//----------------------END RED----------
+		
+		//--------------ORANGE------
+		cannonball_O(Can_O.size());   // counts and creates orange cannon and shots to destination (destination is set by player cursor)
+		// updates the cannonball array for orange
+		for (int i = 0; i < Cannonball_O.size() ; i++)
+		{
+			Cannonball_O.get(i).update();
+		}
+		// removes the blue ball when target is hit
+		cannonball_O_remove(Cannonball_O.size());
+		//-----------END ORANGE -------
 		
 		Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
 		Cannonball_N.remove(0);
-		Cannonball_B.add(new Cannonball_B(0, 96, 1, 1));
-		Cannonball_B.remove(0);
-		Cannonball_O.add(new Cannonball_O(64, 96, 1, 1));
-		Cannonball_O.remove(0);
-		Cannonball_R.add(new Cannonball_R(32, 96, 1, 1));
-		Cannonball_R.remove(0);
+		//Cannonball_B.add(new Cannonball_B(0, 96, 1, 1));
+		//Cannonball_B.remove(0);
+		//Cannonball_O.add(new Cannonball_O(64, 96, 1, 1));
+		//Cannonball_O.remove(0);
+		//Cannonball_R.add(new Cannonball_R(32, 96, 1, 1));
+		//Cannonball_R.remove(0);
 	}
-
+ // -------------------------------------- END OF GAME LOOP ---------------------------------
 // Scan input for all Players.
 void keyInput(long window) {
 	final GLFWKeyCallback   key_Callback;
@@ -626,6 +674,141 @@ void keyInput(long window) {
         } // end of invoke keyevents
         	
     });
+}
+//---------------------------------------------------- CANNON BALL CREATION------------------------------------
+// create blue balls.
+void cannonball_B(int cannonCount) {
+	int destination_x;
+	int destination_y;
+	int original_x;
+	int original_y;
+	
+	if (ballCreation+endTime_P1_ball < startTime_P1_ball) {
+		for(int i = 0; i < cannonCount; i++){
+			destination_x = Cur_B.get(0).getX();
+			destination_y = Cur_B.get(0).getY();
+			original_x = Can_B.get(i).getX();
+			original_y = Can_B.get(i).getY();
+			Cannonball_B.add(new Cannonball_B(original_x, original_y, 1, 1));
+			Cannonball_B.get(countBall_B).setDestinationX(destination_x);
+			Cannonball_B.get(countBall_B).setDestinationY(destination_y);
+			countBall_B++;
+		}
+		endTime_P1_ball = System.currentTimeMillis();
+	}
+}
+//create orange balls
+void cannonball_O(int cannonCount) {
+	int destination_x;
+	int destination_y;
+	int original_x;
+	int original_y;
+	
+	if (ballCreation+endTime_P2_ball < startTime_P2_ball) {
+		for(int i = 0; i < cannonCount; i++){
+			destination_x = Cur_O.get(0).getX();
+			destination_y = Cur_O.get(0).getY();
+			original_x = Can_O.get(i).getX();
+			original_y = Can_O.get(i).getY();
+			Cannonball_O.add(new Cannonball_O(original_x, original_y, 1, 1));
+			Cannonball_O.get(countBall_O).setDestinationX(destination_x);
+			Cannonball_O.get(countBall_O).setDestinationY(destination_y);
+			countBall_O++;
+		}
+		endTime_P2_ball = System.currentTimeMillis();
+	}
+}
+// create red balls
+void cannonball_R(int cannonCount) {
+	int destination_x;
+	int destination_y;
+	int original_x;
+	int original_y;
+	
+	if (ballCreation+endTime_P3_ball < startTime_P3_ball) {
+		for(int i = 0; i < cannonCount; i++){
+			destination_x = Cur_R.get(0).getX();
+			destination_y = Cur_R.get(0).getY();
+			original_x = Can_R.get(i).getX();
+			original_y = Can_R.get(i).getY();
+			Cannonball_R.add(new Cannonball_R(original_x, original_y, 1, 1));
+			Cannonball_R.get(countBall_R).setDestinationX(destination_x);
+			Cannonball_R.get(countBall_R).setDestinationY(destination_y);
+			countBall_R++;
+		}
+		endTime_P3_ball = System.currentTimeMillis();
+	}
+}
+
+
+//---------------------------------- CANNON BALL REMOVING ------------------------
+
+// delete blue balls
+ void cannonball_B_remove(int cannonCount)  {
+	int destination_x;
+	int destination_y;
+	int current_x;
+	int current_y;
+	int ballExist = 0;
+	
+	if (Cannonball_B.size() > ballExist) { // doo only if ball is in array
+		for(int i = 0; i < cannonCount; i++){
+				destination_x = Cannonball_B.get(i).getDestiX();
+				destination_y = Cannonball_B.get(i).getDestiY();
+				current_x = Cannonball_B.get(i).getX();
+				current_y = Cannonball_B.get(i).getY();
+				if( destination_x == current_x && current_y == destination_y) {
+					Cannonball_B.remove(i);
+					countBall_B--;
+					i = cannonCount;  // jump out of the for loop if ball is deleted to prevent array error.
+				}
+		}
+	} 
+} 
+ 
+void cannonball_O_remove(int cannonCount)  {
+		int destination_x;
+		int destination_y;
+		int current_x;
+		int current_y;
+		int ballExist = 0;
+	
+		if (Cannonball_O.size() > ballExist) { // do only if ball is in array
+			for(int i = 0; i < cannonCount; i++){
+					destination_x = Cannonball_O.get(i).getDestiX();
+					destination_y = Cannonball_O.get(i).getDestiY();
+					current_x = Cannonball_O.get(i).getX();
+					current_y = Cannonball_O.get(i).getY();
+					if( destination_x == current_x && current_y == destination_y) {
+						Cannonball_O.remove(i);
+						countBall_O--;
+						i = cannonCount;  // jump out of the for loop if ball is deleted to prevent array error.
+					}
+			}
+		} 
+	}
+//remove red ball
+void cannonball_R_remove(int cannonCount)  {
+	int destination_x;
+	int destination_y;
+	int current_x;
+	int current_y;
+	int ballExist = 0;
+
+	
+	if (Cannonball_R.size() > ballExist) { // do only if a ball is in array
+		for(int i = 0; i < cannonCount; i++){
+				destination_x = Cannonball_R.get(i).getDestiX();
+				destination_y = Cannonball_R.get(i).getDestiY();
+				current_x = Cannonball_R.get(i).getX();
+				current_y = Cannonball_R.get(i).getY();
+				if( destination_x == current_x && current_y == destination_y) {
+					Cannonball_R.remove(i);
+					countBall_R--;
+					i = cannonCount;  // jump out of the for loop if ball is deleted to prevent array error.
+				}
+		}
+	} 
 }
 
 

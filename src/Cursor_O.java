@@ -82,7 +82,12 @@ public class Cursor_O
 		
 		}
 	} 
-	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);
