@@ -18,6 +18,12 @@ public class Cursor_O
     public int sizex;
     public int sizey;
     public int keyPressed = 0;
+    public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
+	
 	
 	public Cursor_O(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -50,16 +56,24 @@ public class Cursor_O
 		case 0:
 			break;
 		case 84:
-			y -= 32;
+			if (y > yTop) {
+				y -= moveSpeed;
+			}
 			break;
 		case 72:
-			x += 32;
+			if (x < xRight) {
+				x += moveSpeed;
+			}
 			break;
 		case 71:
-			y += 32;
+			if (y<yBottom){
+				y += moveSpeed;
+			}
 			break;
 		case 70:
-			x -= 32;
+			if(x>xLeft){
+				x -= moveSpeed;
+			}
 			break;
 		case 82:
 			break;
@@ -68,7 +82,12 @@ public class Cursor_O
 		
 		}
 	} 
-	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);

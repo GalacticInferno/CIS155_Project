@@ -37,6 +37,13 @@ public class Cannon_B
 		
 	}
 	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);

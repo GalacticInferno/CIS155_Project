@@ -18,6 +18,12 @@ public class Cursor_R
     public int sizex;
     public int sizey;
     public int keyPressed;
+    public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
+	
 	
 	public Cursor_R(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -50,16 +56,24 @@ public class Cursor_R
 		case 0:
 			break;
 		case 73:
-			y -= 32;
+			if (y > yTop) {
+				y -= moveSpeed;
+			}
 			break;
 		case 76:
-			x += 32;
+			if (x < xRight) {
+				x += moveSpeed;
+			}
 			break;
 		case 75:
-			y += 32;
+			if (y<yBottom){
+				y += moveSpeed;
+			}
 			break;
 		case 74:
-			x -= 32;
+			if(x> xLeft){
+				x -= moveSpeed;
+			}
 			break;
 		case 85:
 			break;
@@ -67,7 +81,13 @@ public class Cursor_R
 			break;
 		
 		}
-	} 
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	
 	public void draw()
     {

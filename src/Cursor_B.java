@@ -19,6 +19,11 @@ public class Cursor_B
     public int sizex;
     public int sizey;
 	public int keyPressed;
+	public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
 	
 	public Cursor_B(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -47,33 +52,47 @@ public class Cursor_B
 		 * 69 = e
 		 */
 		keyPressed = key;
-		switch(keyPressed){
-		case 0:
-			break;
-		case 87:
-			y -= 32;
-			break;
-		case 68:
-			x += 32;
-			break;
-		case 83:
-			y += 32;
-			break;
-		case 65:
-			x -= 32;
-			break;
-		case 81:
-			break;
-		case 69:
-			break;
-		
-		}
+			switch(keyPressed){
+			case 0:
+				break;
+			case 87:
+				if (y > yTop) {
+					y -= moveSpeed;
+				}
+				break;
+			case 68:
+				if (x < xRight) {
+					x += moveSpeed;
+				}
+				break;
+			case 83:
+				if (y<yBottom){
+					y += moveSpeed;
+				}
+				break;
+			case 65:
+				if(x>xLeft){
+					x -= moveSpeed;
+				}
+				break;
+			case 81:
+				break;
+			case 69:
+				break;
+			
+			}
 	} 
 	
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);
     }
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
     
 	private void square(int x , int y , int sizex, int sizey)
     {

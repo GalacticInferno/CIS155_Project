@@ -15,6 +15,8 @@ public class Cannonball_R
     public int y;
     public int sizex;
     public int sizey;
+    public int destination_x;
+    public int destination_y;
 	
 	public Cannonball_R (int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -32,8 +34,60 @@ public class Cannonball_R
 	
 	public void update()
 	{
-		
+		// moving speed NOTE: NEEDS SOME WORK
+		if ( x < destination_x /*&& y < destination_y*/) 
+		{
+			x += 1;
+			//y += 1;
+		}
+		if ( x > destination_x /*&& y > destination_y*/) 
+		{
+			x -= 1;
+			//y -=1;
+		}
+		if ( y < destination_y) 
+		{
+			y += 1;
+		}
+		if ( y > destination_y) 
+		{
+			y -= 1;
+		} 
 	}
+	public int getX() 
+	{
+		return x;
+	}
+	public int getY() 
+	{
+		return y;
+	}
+	public int getDestiX() 
+	{
+		return destination_x;
+	}
+	public int getDestiY() 
+	{
+		return destination_y;
+	}
+	// set x location of cannon
+		public void setX(int setX) 
+		{
+			x = setX;
+		}
+		// set y location of cannon
+		public void setY(int setY) 
+		{
+			y = setY;
+		}
+		public void setDestinationX(int setDestiX)
+		{
+			destination_x = setDestiX;
+		}
+		public void setDestinationY(int setDestiY)
+		{
+			destination_y = setDestiY;
+		}
 	
 	public void draw()
     {
