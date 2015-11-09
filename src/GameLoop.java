@@ -1,12 +1,11 @@
 
 //This Defines the Drawn objects, first time load objects, and contains game run code.
 
-//import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-//import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 import static org.lwjgl.glfw.GLFW.*;
-//import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
-//import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-//import static org.lwjgl.opengl.GL11.GL_TRUE;
+import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class GameLoop
 	
 	// TIMING MOVEMENT for ALL players 
 	// NOTE HERE: player moves every 0.25 second -- change movSpeed to change movement speed (for all players)
-	int  movSpeed = 250;
+	int  movSpeed = 100;
 	long startTime_P1_move;
 	long endTime_P1_move = System.currentTimeMillis();
 	long startTime_P2_move;
@@ -35,12 +34,10 @@ public class GameLoop
 	long endTime_P2_rotate = System.currentTimeMillis();
 	long startTime_P3_rotate;
 	long endTime_P3_rotate = System.currentTimeMillis();
-<<<<<<< HEAD
 	
 	//Makes space on top of screen for Highscores
 	private int underBanner = 96;
 	
-=======
 	// TIMING CANNONBALL
 	long startTime_P1_ball;
 	long endTime_P1_ball = System.currentTimeMillis();
@@ -55,8 +52,7 @@ public class GameLoop
 	int getBallCount = 0;
 	// how fast the cannon balls are created. ( shots per time).
 	int ballCreation = 2500;
->>>>>>> refs/remotes/origin/basicMovement
-	//Main Background
+	// Main Background
 	ArrayList<Banner> Banner = new ArrayList<Banner>();
 	ArrayList<World> World = new ArrayList<World>();
 	
@@ -166,7 +162,6 @@ public class GameLoop
 		loadtex();
 		
 		//All items here will be run once at start
-<<<<<<< HEAD
 		//                  X   Y
 		Banner.add(new Banner(0,0,0,0));
 		World.add(new World(0, 0 + underBanner, 0, 0));
@@ -201,43 +196,9 @@ public class GameLoop
 		Cannonball_B.add(new Cannonball_B(512, 64 + underBanner, 0, 0));
 		Cannonball_O.add(new Cannonball_O(544, 64 + underBanner, 0, 0));
 		Cannonball_R.add(new Cannonball_R(576, 64 + underBanner, 0, 0));
-=======
-		World.add(new World(0, 0, 0, 0));
-		Wal_B.add(new Wall_B(0, 64, 0, 0));
-		Wal_R.add(new Wall_R(32, 64, 0, 0));
-		Wal_O.add(new Wall_O(64, 64, 0, 0));
-		Wal_N.add(new Wall_N(96, 64, 0, 0));
-		Wal_D.add(new Wall_D(128, 64, 0, 0));
-		Cas_B.add(new Castle_B(0, 0, 0, 0));
-		Cas_R.add(new Castle_R(64, 0, 0, 0));
-		Cas_O.add(new Castle_O(128, 0, 0, 0));
-		Cas_N.add(new Castle_N(192, 0, 0, 0));
-		Can_B.add(new Cannon_B(256, 0, 0, 0));
-		Can_B.add(new Cannon_B(456, 456, 0, 0));
-		Can_R.add(new Cannon_R(320, 0, 0, 0));
-		Can_O.add(new Cannon_O(384, 0, 0, 0));
-		Can_N.add(new Cannon_N(448, 0, 0, 0));
-		Boat.add(new Boat_ai(512, 0, 0, 0));
-		Blue.add(new B(352, 64, 0, 0));
-		Red.add(new R(384, 64, 0, 0));
-		Orange.add(new O(416, 64, 0, 0));
-		Black.add(new Black(448, 64, 0, 0));
 		
-		//Cursors
-		Cur_B.add(new Cursor_B(160, 64, 0, 0));
-		Cur_R.add(new Cursor_R(192, 64, 0, 0));
-		Cur_O.add(new Cursor_O(224, 64, 0, 0));
-		Bil_B.add(new Build_B(256, 64, 0, 0));
-		Bil_R.add(new Build_R(288, 64, 0, 0));
-		Bil_O.add(new Build_O(320, 64, 0, 0));
-		Ball.add(new Ball(480, 64, 0, 0));
-		Cannonball_N.add(new Cannonball_N(480, 64, 0, 0));
-		//Cannonball_B.add(new Cannonball_B(480, 64, 0, 0));
-		//Cannonball_O.add(new Cannonball_O(480, 64, 0, 0));
-		//Cannonball_R.add(new Cannonball_R(480, 64, 0, 0));
->>>>>>> refs/remotes/origin/basicMovement
 	}
-	
+
 	public void draw()
 	{
 		
@@ -408,19 +369,6 @@ public class GameLoop
 		cannonball_B_remove(Cannonball_B.size());
 		//-------------END BLUE-----------
 		
-<<<<<<< HEAD
-
-		//Cur_B.get(0).update();
-		//								  X   Y   
-		/*Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
-		Cannonball_N.remove(0);
-		Cannonball_B.add(new Cannonball_B(0, 96, 1, 1));
-		Cannonball_B.remove(0);
-		Cannonball_O.add(new Cannonball_O(64, 96, 1, 1));
-		Cannonball_O.remove(0);
-		Cannonball_R.add(new Cannonball_R(32, 96, 1, 1));
-		Cannonball_R.remove(0);*/
-=======
 		//-----------------------RED-----------
 		cannonball_R(Can_R.size());   // counts and creates red cannon and shots to destination (destination is set by player cursor)
 		// updates the cannonball array for red
@@ -444,14 +392,6 @@ public class GameLoop
 		//-----------END ORANGE -------
 		
 		Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
-		Cannonball_N.remove(0);
-		//Cannonball_B.add(new Cannonball_B(0, 96, 1, 1));
-		//Cannonball_B.remove(0);
-		//Cannonball_O.add(new Cannonball_O(64, 96, 1, 1));
-		//Cannonball_O.remove(0);
-		//Cannonball_R.add(new Cannonball_R(32, 96, 1, 1));
-		//Cannonball_R.remove(0);
->>>>>>> refs/remotes/origin/basicMovement
 	}
  // -------------------------------------- END OF GAME LOOP ---------------------------------
 // Scan input for all Players.
@@ -793,8 +733,8 @@ void cannonball_R(int cannonCount) {
 		for(int i = 0; i < cannonCount; i++){
 			destination_x = Cur_R.get(0).getX();
 			destination_y = Cur_R.get(0).getY();
-			original_x = Can_R.get(i).getX();
-			original_y = Can_R.get(i).getY();
+			original_x = Cannonball_R.get(i).getX();
+			original_y = Cannonball_R.get(i).getY();
 			Cannonball_R.add(new Cannonball_R(original_x, original_y, 1, 1));
 			Cannonball_R.get(countBall_R).setDestinationX(destination_x);
 			Cannonball_R.get(countBall_R).setDestinationY(destination_y);
