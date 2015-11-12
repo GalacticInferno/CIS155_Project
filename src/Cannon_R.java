@@ -36,6 +36,12 @@ public class Cannon_R
 	{
 		
 	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	
 	public void draw()
     {

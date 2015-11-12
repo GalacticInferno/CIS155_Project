@@ -17,6 +17,12 @@ public class Build_O
     public int y;
     public int sizex;
     public int sizey;
+    public int keyPressed;
+	public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
 	
 	public Build_O(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -32,9 +38,57 @@ public class Build_O
 		texture = bitmapobjectstextures.Build_O_tex;
 	}
 	
-	public void update()
+	public void update(int key)
 	{
-		
+		/*
+		 
+		 */
+		keyPressed = key;
+			switch(keyPressed){
+			case 0:
+				break;
+			case 84:
+				if (y > yTop) {
+					y -= moveSpeed;
+				}
+				break;
+			case 72:
+				if (x < xRight) {
+					x += moveSpeed;
+				}
+				break;
+			case 71:
+				if (y<yBottom){
+					y += moveSpeed;
+				}
+				break;
+			case 70:
+				if(x>xLeft){
+					x -= moveSpeed;
+				}
+				break;
+			case 82:
+				break;
+			case 89:
+				break;
+			
+			}
+	}
+	public int getX() 
+	{
+		return x;
+	}
+	public int getY() 
+	{
+		return y;
+	}
+	public void setX(int setX) 
+	{
+		x = setX;
+	}
+	public void setY(int setY) 
+	{
+		y = setY;
 	}
 	
 	public void draw()
