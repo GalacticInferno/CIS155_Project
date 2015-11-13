@@ -17,6 +17,12 @@ public class Build_R
     public int y;
     public int sizex;
     public int sizey;
+    public int keyPressed;
+	public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
 	
 	public Build_R(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -32,9 +38,57 @@ public class Build_R
 		texture = bitmapobjectstextures.Build_R_tex;
 	}
 	
-	public void update()
+	public void update(int key)
 	{
+		/*
 		
+		 */
+		keyPressed = key;
+			switch(keyPressed){
+			case 0:
+				break;
+			case 73:
+				if (y > yTop) {
+					y -= moveSpeed;
+				}
+				break;
+			case 76:
+				if (x < xRight) {
+					x += moveSpeed;
+				}
+				break;
+			case 75:
+				if (y<yBottom){
+					y += moveSpeed;
+				}
+				break;
+			case 74:
+				if(x> xLeft){
+					x -= moveSpeed;
+				}
+				break;
+			case 85:
+				break;
+			case 79:
+				break;
+			
+			}
+	}
+	public int getX() 
+	{
+		return x;
+	}
+	public int getY() 
+	{
+		return y;
+	}
+	public void setX(int setX) 
+	{
+		x = setX;
+	}
+	public void setY(int setY) 
+	{
+		y = setY;
 	}
 	
 	public void draw()

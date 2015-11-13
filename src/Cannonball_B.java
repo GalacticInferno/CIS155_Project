@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
 import org.lwjgl.opengl.GL11;
+import java.lang.Math;
 
 public class Cannonball_B 
 {
@@ -13,10 +14,19 @@ int texture[] = new int[3];
 	
 	public int x;
     public int y;
+    public double xD;
+    public double yD;
     public int sizex;
     public int sizey;
     public int destination_x;
     public int destination_y;
+    double  diagonal;
+    double xSpeed;
+    double ySpeed;
+    int initCalc = 0;  // for initial direction calculation
+    double totalDistance;
+    double movSpeed = 1;
+  
 
 	
 	public Cannonball_B (int x1 , int y1 , int sizex1, int sizey1)
@@ -31,30 +41,38 @@ int texture[] = new int[3];
 	
 	public void load()
 	{
+
 		texture = bitmapobjectstextures.Cannonball_B_tex;
+	}
+	
+	public void calcMov() 
+	{
+			diagonal = Math.sqrt(Math.pow(Math.abs(x-destination_x), 2) + Math.pow(Math.abs(y-destination_y), 2));
+			xSpeed = (x-destination_x)/(diagonal/10);
+			ySpeed = (y-destination_y)/(diagonal/10);
+			if ( initCalc == 0)
+				totalDistance = diagonal/10;
+	
 	}
 	
 	public void update()
 	{
-		
-		if ( x < destination_x /*&& y < destination_y*/) 
+
+		if ((x != destination_x && y != destination_y)) 
 		{
-			x += 1;
-			//y += 1;
+			x -= xSpeed * movSpeed;
+			y -= ySpeed * movSpeed;
+			initCalc++; // disables initial distance calculation
+			calcMov();   // adjust direction
 		}
-		if ( x > destination_x /*&& y > destination_y*/) 
+		if (x == destination_x && y != destination_y)
 		{
-			x -= 1;
-			//y -=1;
+			y -= ySpeed * movSpeed;
 		}
-		if ( y < destination_y) 
+		if (x != destination_x && y == destination_y)
 		{
-			y += 1;
+			x -= xSpeed * movSpeed;
 		}
-		if ( y > destination_y) 
-		{
-			y -= 1;
-		} 
 	}
 	public int getX() 
 	{

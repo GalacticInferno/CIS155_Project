@@ -56,23 +56,88 @@ public class Cursor_O
 		case 0:
 			break;
 		case 84:
-			if (y > yTop) {
-				y -= moveSpeed;
+			if (y > yTop ) {
+				if ( GameLoop.Bil_O.size() == 0) { // moves if no random wall exists
+					y -= moveSpeed;
+					for (int i =0; i < GameLoop.Bil_O.size(); i++)
+	            	{
+	            		GameLoop.Bil_O.get(i).update(key);
+	            	}
+				}
+				else if (GameLoop.Bil_O.size() > 0)  // gets the location of random wall and tests if it would go over the border
+				{
+					if (GameLoop.Bil_O.get(GameLoop.Bil_O.size()-2).getY() > yTop) {
+						y -= moveSpeed;
+						for (int i =0; i < GameLoop.Bil_O.size(); i++)
+		            	{
+		            		GameLoop.Bil_O.get(i).update(key);
+		            	}
+					}			
+				}
 			}
 			break;
 		case 72:
 			if (x < xRight) {
-				x += moveSpeed;
+				if ( GameLoop.Bil_O.size() == 0) { // moves if no random wall exists
+					x += moveSpeed;
+					for (int i =0; i < GameLoop.Bil_O.size(); i++)
+	            	{
+	            		GameLoop.Bil_O.get(i).update(key);
+	            	}
+				}
+				else if (GameLoop.Bil_O.size() > 0)
+				{
+					if (GameLoop.Bil_O.get(GameLoop.Bil_O.size()-2).getX() < xRight) { // gets the location of random wall and tests if it would go over the border
+						x += moveSpeed;
+						for (int i =0; i < GameLoop.Bil_O.size(); i++)
+		            	{
+		            		GameLoop.Bil_O.get(i).update(key);
+		            	}
+					}			
+				}
 			}
 			break;
 		case 71:
 			if (y<yBottom){
-				y += moveSpeed;
+				//y += moveSpeed;
+				if ( GameLoop.Bil_O.size() == 0) { // moves if no random wall exists
+					y += moveSpeed;
+					for (int i =0; i < GameLoop.Bil_O.size(); i++)
+	            	{
+	            		GameLoop.Bil_O.get(i).update(key);
+	            	}
+				}
+				else if (GameLoop.Bil_O.size() > 0)
+				{
+					if (GameLoop.Bil_O.get(GameLoop.Bil_O.size()-2).getY() < yBottom) { // gets the location of random wall and tests if it would go over the border
+						y += moveSpeed;
+						for (int i =0; i < GameLoop.Bil_O.size(); i++)
+		            	{
+		            		GameLoop.Bil_O.get(i).update(key);
+		            	}
+					}			
+				}
 			}
 			break;
 		case 70:
 			if(x>xLeft){
-				x -= moveSpeed;
+					if ( GameLoop.Bil_O.size() == 0) { // moves if no random wall exists
+						x -= moveSpeed;
+						for (int i =0; i < GameLoop.Bil_O.size(); i++)
+		            	{
+		            		GameLoop.Bil_O.get(i).update(key);
+		            	}
+					}
+					else if (GameLoop.Bil_O.size() > 0)
+					{
+						if (GameLoop.Bil_O.get(GameLoop.Bil_O.size()-2).getX() > xLeft) { // gets the location of random wall and tests if it would go over the border
+							x -= moveSpeed;
+							for (int i =0; i < GameLoop.Bil_O.size(); i++)
+			            	{
+			            		GameLoop.Bil_O.get(i).update(key);
+			            	}
+						}			
+					}
 			}
 			break;
 		case 82:

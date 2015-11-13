@@ -37,6 +37,22 @@ public class Wall_R
 	{
 		
 	}
+	public int getX() 
+	{
+		return x;
+	}
+	public int getY() 
+	{
+		return y;
+	}
+	public void setX(int setX) 
+	{
+		x = setX;
+	}
+	public void setY(int setY) 
+	{
+		y = setY;
+	}
 	
 	public void draw()
     {
