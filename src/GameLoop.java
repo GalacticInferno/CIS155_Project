@@ -36,7 +36,6 @@ public class GameLoop
 	long endTime_P2_rotate = System.currentTimeMillis();
 	long startTime_P3_rotate;
 	long endTime_P3_rotate = System.currentTimeMillis();
-<<<<<<< HEAD
 	
 	//Makes space on top of screen for Highscores
 	public static int underBanner = 96;
@@ -57,8 +56,7 @@ public class GameLoop
 	int ballCreation = 2500;
 	// Main Background
 	ArrayList<Banner> Banner = new ArrayList<Banner>();
-	ArrayList<World> World = new ArrayList<World>();
-=======
+
 	// Wall variables
 	boolean wallActive = false;
 	// random generator
@@ -66,7 +64,6 @@ public class GameLoop
 
 	//Main Background
 	public ArrayList<World> World = new ArrayList<World>();
->>>>>>> refs/remotes/origin/basicMovement
 	
 	//ALL WALL LISTS---
 	//Blue Wall
@@ -108,7 +105,7 @@ public class GameLoop
 	
 	//ALL CANNON LIST---
 	//Blue Cannon
-<<<<<<< HEAD
+
 	public static ArrayList<Cannon_B> Can_B = new ArrayList<Cannon_B>();
 	//Red Cannon
 	public static ArrayList<Cannon_R> Can_R = new ArrayList<Cannon_R>();
@@ -116,15 +113,8 @@ public class GameLoop
 	public static ArrayList<Cannon_O> Can_O = new ArrayList<Cannon_O>();
 	//Black Cannon
 	public static ArrayList<Cannon_N> Can_N = new ArrayList<Cannon_N>();
-=======
-	public  static ArrayList<Cannon_B> Can_B = new ArrayList<Cannon_B>();
-	//Red Cannon
-	public static ArrayList<Cannon_R> Can_R = new ArrayList<Cannon_R>();
-	//Orange Cannon
-	public  static ArrayList<Cannon_O> Can_O = new ArrayList<Cannon_O>();
-	//Black Cannon
-	public  static ArrayList<Cannon_N> Can_N = new ArrayList<Cannon_N>();
->>>>>>> refs/remotes/origin/basicMovement
+
+
 	
 	//FLAT COLOURS---
 	//Blue
@@ -184,7 +174,6 @@ public class GameLoop
 		loadtex();
 		
 		//All items here will be run once at start
-<<<<<<< HEAD
 		//                  X   Y
 		Banner.add(new Banner(0,0,0,0));
 		World.add(new World(0, 0 + underBanner, 0, 0));
@@ -239,42 +228,6 @@ public class GameLoop
 		Bil_B.add(new Build_B(256, 64 + underBanner, 0, 0));
 		Bil_R.add(new Build_R(288, 64 + underBanner, 0, 0));
 		Bil_O.add(new Build_O(320, 64 + underBanner, 0, 0));
-		
-=======
-		World.add(new World(0, 0, 0, 0));
-		//Wal_B.add(new Wall_B(0, 64, 0, 0));
-		//Wal_R.add(new Wall_R(32, 64, 0, 0));
-		//Wal_O.add(new Wall_O(64, 64, 0, 0));
-		Wal_N.add(new Wall_N(96, 64, 0, 0));
-		Wal_D.add(new Wall_D(128, 64, 0, 0));
-		Cas_B.add(new Castle_B(0, 0, 0, 0));
-		Cas_R.add(new Castle_R(64, 0, 0, 0));
-		Cas_O.add(new Castle_O(128, 0, 0, 0));
-		Cas_N.add(new Castle_N(192, 0, 0, 0));
-		Can_B.add(new Cannon_B(256, 0, 0, 0));
-		Can_B.add(new Cannon_B(512, 256, 0, 0));
-		Can_R.add(new Cannon_R(320, 0, 0, 0));
-		Can_O.add(new Cannon_O(384, 0, 0, 0));
-		Can_N.add(new Cannon_N(448, 0, 0, 0));
-		Boat.add(new Boat_ai(512, 0, 0, 0));
-		Blue.add(new B(352, 64, 0, 0));
-		Red.add(new R(384, 64, 0, 0));
-		Orange.add(new O(416, 64, 0, 0));
-		Black.add(new Black(448, 64, 0, 0));
-		
-		//Cursors
-		Cur_B.add(new Cursor_B(160, 64, 0, 0));
-		Cur_R.add(new Cursor_R(192, 64, 0, 0));
-		Cur_O.add(new Cursor_O(224, 64, 0, 0));
-		//Bil_B.add(new Build_B(256, 64, 0, 0));
-		//Bil_R.add(new Build_R(288, 64, 0, 0));
-		//Bil_O.add(new Build_O(320, 64, 0, 0));
-		Ball.add(new Ball(480, 64, 0, 0));
-		Cannonball_N.add(new Cannonball_N(480, 64, 0, 0));
-		//Cannonball_B.add(new Cannonball_B(480, 64, 0, 0));
-		//Cannonball_O.add(new Cannonball_O(480, 64, 0, 0));
-		//Cannonball_R.add(new Cannonball_R(480, 64, 0, 0));
->>>>>>> refs/remotes/origin/basicMovement
 	}
 
 	public void draw()
@@ -439,7 +392,7 @@ public class GameLoop
 		Cannonball_create.startTime_P3_ball = System.currentTimeMillis(); 
 		
 		keyInput(window); // scan for input
-<<<<<<< HEAD
+
 		
 		ff.floodFill();
 		
@@ -451,10 +404,8 @@ public class GameLoop
 			Cannonball_B.get(i).update();
 		}
 		// removes the blue ball when target is hit
-		cannonball_B_remove(Cannonball_B.size());
+		//cannonball_B_remove(Cannonball_B.size());
 		//-------------END BLUE-----------
-=======
->>>>>>> refs/remotes/origin/basicMovement
 		
 		// blue
 		PlaceWall.checkForWall_B();  // checks if wall can be build
@@ -469,26 +420,23 @@ public class GameLoop
 		PlaceWall.checkForCannon_O();
 		PlaceWall.checkForCastle_O();
 		
-<<<<<<< HEAD
 		//--------------ORANGE------
-		cannonball_O(Can_O.size());   // counts and creates orange cannon and shots to destination (destination is set by player cursor)
+		//cannonball_O(Can_O.size());   // counts and creates orange cannon and shots to destination (destination is set by player cursor)
 		// updates the cannonball array for orange
 		for (int i = 0; i < Cannonball_O.size() ; i++)
 		{
 			Cannonball_O.get(i).update();
 		}
 		// removes the orange ball when target is hit
-		cannonball_O_remove(Cannonball_O.size());
+		//cannonball_O_remove(Cannonball_O.size());
 		//-----------END ORANGE -------
-=======
+		
 		cannonShot();   // cannon shooting 
 
 		
 
 		Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
 		Cannonball_N.remove(0);
-
->>>>>>> refs/remotes/origin/basicMovement
 	}
 // -------------------------------------- END OF GAME LOOP ---------------------------------
 	
@@ -787,7 +735,7 @@ void keyInput(long window) {
         	
     });
 }
-<<<<<<< HEAD
+
 //---------------------------------------------------- CANNON BALL CREATION------------------------------------
 // create blue balls.
 void cannonball_B(int cannonCount) {
@@ -851,7 +799,8 @@ void cannonball_R(int cannonCount) {
 		}
 		endTime_P3_ball = System.currentTimeMillis();
 	}
-=======
+}
+
 public void cannonShot() 
 {
 	//------BLUE-----------
@@ -887,8 +836,8 @@ public void cannonShot()
 			// removes the orange ball when target is hit
 			Cannonball_create.cannonball_O_remove(Cannonball_O.size());
 			//-----------END ORANGE -------
->>>>>>> refs/remotes/origin/basicMovement
 }
+
 void checkMov() {
 	if ( Cur_B.get(0).getX() < Cur_B.get(0).yTop )
 	{
