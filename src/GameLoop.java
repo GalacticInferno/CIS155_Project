@@ -36,7 +36,7 @@ public class GameLoop
 	long endTime_P3_rotate = System.currentTimeMillis();
 	
 	//Makes space on top of screen for Highscores
-	private int underBanner = 96;
+	public static int underBanner = 96;
 	
 	// TIMING CANNONBALL
 	long startTime_P1_ball;
@@ -58,68 +58,68 @@ public class GameLoop
 	
 	//ALL WALL LISTS---
 	//Blue Wall
-	ArrayList<Wall_B> Wal_B = new ArrayList<Wall_B>();
+	public static ArrayList<Wall_B> Wal_B = new ArrayList<Wall_B>();
 	//Red Wall
-	ArrayList<Wall_R> Wal_R = new ArrayList<Wall_R>();
+	public static ArrayList<Wall_R> Wal_R = new ArrayList<Wall_R>();
 	//Orange Wall
-	ArrayList<Wall_O> Wal_O = new ArrayList<Wall_O>();
+	public static ArrayList<Wall_O> Wal_O = new ArrayList<Wall_O>();
 	//Black Wall
-	ArrayList<Wall_N> Wal_N = new ArrayList<Wall_N>();
+	public static ArrayList<Wall_N> Wal_N = new ArrayList<Wall_N>();
 	//Destroyed Wall
-	ArrayList<Wall_D> Wal_D = new ArrayList<Wall_D>();
+	public static ArrayList<Wall_D> Wal_D = new ArrayList<Wall_D>();
 	
 	//All CURSORS---
 	//Blue Cursor
-	ArrayList<Cursor_B> Cur_B = new ArrayList<Cursor_B>();
+	public static ArrayList<Cursor_B> Cur_B = new ArrayList<Cursor_B>();
 	//Red Cursor
-	ArrayList<Cursor_R> Cur_R = new ArrayList<Cursor_R>();
+	public static ArrayList<Cursor_R> Cur_R = new ArrayList<Cursor_R>();
 	//Orange Cursor
-	ArrayList<Cursor_O> Cur_O = new ArrayList<Cursor_O>();
+	public static ArrayList<Cursor_O> Cur_O = new ArrayList<Cursor_O>();
 	//Blue Build Cursor
-	ArrayList<Build_B> Bil_B = new ArrayList<Build_B>();
+	public static ArrayList<Build_B> Bil_B = new ArrayList<Build_B>();
 	//Red Build Cursor
-	ArrayList<Build_R> Bil_R = new ArrayList<Build_R>();
+	public static ArrayList<Build_R> Bil_R = new ArrayList<Build_R>();
 	//Orange Build Cursor
-	ArrayList<Build_O> Bil_O = new ArrayList<Build_O>();
+	public static ArrayList<Build_O> Bil_O = new ArrayList<Build_O>();
 	
 	//ALL CASTLE LISTS---
 	//Blue Castles
-	ArrayList<Castle_B> Cas_B = new ArrayList<Castle_B>();
+	public static ArrayList<Castle_B> Cas_B = new ArrayList<Castle_B>();
 	//Red Castles
-	ArrayList<Castle_R> Cas_R = new ArrayList<Castle_R>();
+	public static ArrayList<Castle_R> Cas_R = new ArrayList<Castle_R>();
 	//Orange Castles
-	ArrayList<Castle_O> Cas_O = new ArrayList<Castle_O>();
+	public static ArrayList<Castle_O> Cas_O = new ArrayList<Castle_O>();
 	//Black Castles
-	ArrayList<Castle_N> Cas_N = new ArrayList<Castle_N>();
+	public static ArrayList<Castle_N> Cas_N = new ArrayList<Castle_N>();
 	//Boat
-	ArrayList<Boat_ai> Boat = new ArrayList<Boat_ai>();
+	public static ArrayList<Boat_ai> Boat = new ArrayList<Boat_ai>();
 	
 	//ALL CANNON LIST---
 	//Blue Cannon
-	ArrayList<Cannon_B> Can_B = new ArrayList<Cannon_B>();
+	public static ArrayList<Cannon_B> Can_B = new ArrayList<Cannon_B>();
 	//Red Cannon
-	ArrayList<Cannon_R> Can_R = new ArrayList<Cannon_R>();
+	public static ArrayList<Cannon_R> Can_R = new ArrayList<Cannon_R>();
 	//Orange Cannon
-	ArrayList<Cannon_O> Can_O = new ArrayList<Cannon_O>();
+	public static ArrayList<Cannon_O> Can_O = new ArrayList<Cannon_O>();
 	//Black Cannon
-	ArrayList<Cannon_N> Can_N = new ArrayList<Cannon_N>();
+	public static ArrayList<Cannon_N> Can_N = new ArrayList<Cannon_N>();
 	
 	//FLAT COLOURS---
 	//Blue
-	ArrayList<B> Blue = new ArrayList<B>();
+	public static ArrayList<B> Blue = new ArrayList<B>();
 	//Red
-	ArrayList<R> Red = new ArrayList<R>();
+	public static ArrayList<R> Red = new ArrayList<R>();
 	//Orange
-	ArrayList<O> Orange = new ArrayList<O>();
+	public static ArrayList<O> Orange = new ArrayList<O>();
 	//Black
-	ArrayList<Black> Black = new ArrayList<Black>();
+	public static ArrayList<Black> Black = new ArrayList<Black>();
 	
 	//Cannon balls
-	ArrayList<Ball> Ball = new ArrayList<Ball>();
-	ArrayList<Cannonball_N> Cannonball_N = new ArrayList<Cannonball_N>();
-	ArrayList<Cannonball_B> Cannonball_B = new ArrayList<Cannonball_B>();
-	ArrayList<Cannonball_O> Cannonball_O = new ArrayList<Cannonball_O>();
-	ArrayList<Cannonball_R> Cannonball_R = new ArrayList<Cannonball_R>();
+	public static ArrayList<Ball> Ball = new ArrayList<Ball>();
+	public static ArrayList<Cannonball_N> Cannonball_N = new ArrayList<Cannonball_N>();
+	public static ArrayList<Cannonball_B> Cannonball_B = new ArrayList<Cannonball_B>();
+	public static ArrayList<Cannonball_O> Cannonball_O = new ArrayList<Cannonball_O>();
+	public static ArrayList<Cannonball_R> Cannonball_R = new ArrayList<Cannonball_R>();
 	
 	private void loadtex()
 	{
@@ -165,12 +165,37 @@ public class GameLoop
 		//                  X   Y
 		Banner.add(new Banner(0,0,0,0));
 		World.add(new World(0, 0 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 64 + underBanner, 0, 0));
+		
+		Wal_B.add(new Wall_B(0, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(32, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(96, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(64, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(128, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(160, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(192, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 96 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 160 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 192 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 224 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(192, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(160, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(128, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(96, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(64, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(32, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(0, 256 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(0, 224 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(0, 192 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(0, 160 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(0, 128 + underBanner, 0, 0));
+		
 		Wal_R.add(new Wall_R(32, 64 + underBanner, 0, 0));
 		Wal_O.add(new Wall_O(64, 64 + underBanner, 0, 0));
 		Wal_N.add(new Wall_N(96, 64 + underBanner, 0, 0));
 		Wal_D.add(new Wall_D(128, 64 + underBanner, 0, 0));
-		Cas_B.add(new Castle_B(0, 0 + underBanner, 0, 0));
+		Cas_B.add(new Castle_B(96, 160 + underBanner, 0, 0));
 		Cas_R.add(new Castle_R(64, 0 + underBanner, 0, 0));
 		Cas_O.add(new Castle_O(128, 0 + underBanner, 0, 0));
 		Cas_N.add(new Castle_N(192, 0 + underBanner, 0, 0));
@@ -191,11 +216,6 @@ public class GameLoop
 		Bil_B.add(new Build_B(256, 64 + underBanner, 0, 0));
 		Bil_R.add(new Build_R(288, 64 + underBanner, 0, 0));
 		Bil_O.add(new Build_O(320, 64 + underBanner, 0, 0));
-		Ball.add(new Ball(480, 64 + underBanner, 0, 0));
-		Cannonball_N.add(new Cannonball_N(480, 64 + underBanner, 0, 0));
-		Cannonball_B.add(new Cannonball_B(512, 64 + underBanner, 0, 0));
-		Cannonball_O.add(new Cannonball_O(544, 64 + underBanner, 0, 0));
-		Cannonball_R.add(new Cannonball_R(576, 64 + underBanner, 0, 0));
 		
 	}
 
@@ -237,26 +257,6 @@ public class GameLoop
 			Wal_D.get(i).draw();
 		}
 		
-		//Draw all Blue Castles in list
-		for(int i = 0; i<Cas_B.size(); i++)
-		{
-			Cas_B.get(i).draw();
-		}
-		//Draw all Red Castles in list
-		for(int i = 0; i<Cas_R.size(); i++)
-		{
-			Cas_R.get(i).draw();
-		}
-		//Draw all Orange Castles in list
-		for(int i = 0; i<Cas_O.size(); i++)
-		{
-			Cas_O.get(i).draw();
-		}
-		//Draw all Black Castles in list
-		for(int i = 0; i<Cas_N.size(); i++)
-		{
-			Cas_N.get(i).draw();
-		}
 		//Draw all Boats in list
 		for(int i = 0; i<Boat.size(); i++)
 		{
@@ -298,6 +298,27 @@ public class GameLoop
 		for(int i = 0; i<Black.size(); i++)
 		{
 			Black.get(i).draw();
+		}
+		
+		//Draw all Blue Castles in list
+		for(int i = 0; i<Cas_B.size(); i++)
+		{
+			Cas_B.get(i).draw();
+		}
+		//Draw all Red Castles in list
+		for(int i = 0; i<Cas_R.size(); i++)
+		{
+			Cas_R.get(i).draw();
+		}
+		//Draw all Orange Castles in list
+		for(int i = 0; i<Cas_O.size(); i++)
+		{
+			Cas_O.get(i).draw();
+		}
+		//Draw all Black Castles in list
+		for(int i = 0; i<Cas_N.size(); i++)
+		{
+			Cas_N.get(i).draw();
 		}
 		
 		//CURSORS ALWAYS LAST SO THEY WILL BE ON TOP
@@ -352,12 +373,17 @@ public class GameLoop
 	//Put All game code here!!!
 	public void update(long window)
 	{	
+		FloodFill ff = new FloodFill();
+		
 		// get start time for timing shooting.
 		startTime_P1_ball = System.currentTimeMillis();
 		startTime_P2_ball = System.currentTimeMillis();
 		startTime_P3_ball = System.currentTimeMillis();
 		
 		keyInput(window); // scan for input
+		
+		ff.floodFill();
+		
 		//------BLUE-----------
 		cannonball_B(Can_B.size());   // counts and creates blue cannon and shots to destination (destination is set by player cursor)
 		// updates the cannonball array for BLUE
@@ -390,10 +416,9 @@ public class GameLoop
 		// removes the orange ball when target is hit
 		cannonball_O_remove(Cannonball_O.size());
 		//-----------END ORANGE -------
-		
-		Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
 	}
- // -------------------------------------- END OF GAME LOOP ---------------------------------
+// -------------------------------------- END OF GAME LOOP ---------------------------------
+	
 // Scan input for all Players.
 void keyInput(long window) {
 	final GLFWKeyCallback   key_Callback;
@@ -733,8 +758,8 @@ void cannonball_R(int cannonCount) {
 		for(int i = 0; i < cannonCount; i++){
 			destination_x = Cur_R.get(0).getX();
 			destination_y = Cur_R.get(0).getY();
-			original_x = Cannonball_R.get(i).getX();
-			original_y = Cannonball_R.get(i).getY();
+			original_x = Cur_R.get(i).getX();
+			original_y = Cur_R.get(i).getY();
 			Cannonball_R.add(new Cannonball_R(original_x, original_y, 1, 1));
 			Cannonball_R.get(countBall_R).setDestinationX(destination_x);
 			Cannonball_R.get(countBall_R).setDestinationY(destination_y);
