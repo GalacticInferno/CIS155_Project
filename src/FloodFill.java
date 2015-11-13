@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit;
+
 /**
  * 
  */
@@ -148,20 +150,23 @@ public class FloodFill
 			return;
 		
 		// Clears drawing if its not contained in walls
-		if(b > 60)
-		{
+		if(b > 70)
+		{			
+			GameLoop.Blue.clear();
 			GameLoop.Blue.clear();
 			return;
 		}
 		
-		if(o > 60)
+		if(o > 70)
 		{
+			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
 			return;
 		}
 		
-		if(r > 60)
+		if(r > 70)
 		{
+			GameLoop.Red.clear();
 			GameLoop.Red.clear();
 			return;
 		}
