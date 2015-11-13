@@ -43,6 +43,8 @@ public class Cursor_B
 	
 	public void update(int key)
 	{
+		Debug db = new Debug();
+		
 		/*
 		 * KEY MAPP
 		 * 0 = no key pressed
@@ -54,6 +56,7 @@ public class Cursor_B
 		 * 69 = e
 		 */
 		keyPressed = key;
+		
 			switch(keyPressed){
 			case 0:
 				break;
@@ -68,7 +71,7 @@ public class Cursor_B
 					}
 					else if (GameLoop.Bil_B.size() > 0)  // gets the location of random wall and tests if it would go over the border
 					{
-						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getY() > yTop) {
+						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-1).getY() > yTop) {
 							y -= moveSpeed;
 							for (int i =0; i < GameLoop.Bil_B.size(); i++)
 			            	{
@@ -89,7 +92,7 @@ public class Cursor_B
 					}
 					else if (GameLoop.Bil_B.size() > 0)
 					{
-						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getX() < xRight) { // gets the location of random wall and tests if it would go over the border
+						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-1).getX() < xRight) { // gets the location of random wall and tests if it would go over the border
 							x += moveSpeed;
 							for (int i =0; i < GameLoop.Bil_B.size(); i++)
 			            	{
@@ -111,7 +114,7 @@ public class Cursor_B
 					}
 					else if (GameLoop.Bil_B.size() > 0)
 					{
-						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getY() < yBottom) { // gets the location of random wall and tests if it would go over the border
+						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-1).getY() < yBottom) { // gets the location of random wall and tests if it would go over the border
 							y += moveSpeed;
 							for (int i =0; i < GameLoop.Bil_B.size(); i++)
 			            	{
@@ -132,7 +135,7 @@ public class Cursor_B
 						}
 						else if (GameLoop.Bil_B.size() > 0)
 						{
-							if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getX() > xLeft) { // gets the location of random wall and tests if it would go over the border
+							if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-1).getX() > xLeft) { // gets the location of random wall and tests if it would go over the border
 								x -= moveSpeed;
 								for (int i =0; i < GameLoop.Bil_B.size(); i++)
 				            	{

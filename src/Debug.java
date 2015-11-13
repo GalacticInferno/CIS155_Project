@@ -8,7 +8,7 @@
  */
 public class Debug 
 {
-	private boolean debug = false;
+	private boolean debug = true;
 	
 	public void debugString(String s)
 	{

@@ -233,11 +233,7 @@ public class GameLoop
 	public void draw()
 	{
 		
-		// Last Drawn Item in list is top...
-		for(int i = 0; i<Banner.size(); i++)
-		{
-			Banner.get(i).draw();
-		}	
+		// Last Drawn Item in list is top...	
 		for(int i = 0; i<World.size(); i++)
 		{
 			World.get(i).draw();
@@ -357,6 +353,12 @@ public class GameLoop
 		{
 			Bil_O.get(i).draw();
 		}
+		// Banner
+		for(int i = 0; i<Banner.size(); i++)
+		{
+			Banner.get(i).draw();
+		}
+		
 		//cannon balls must also be on top
 		for(int i = 0; i<Ball.size(); i++)
 		{

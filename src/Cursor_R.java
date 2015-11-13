@@ -66,7 +66,7 @@ public class Cursor_R
 				}
 				else if (GameLoop.Bil_R.size() > 0)  // gets the location of random wall and tests if it would go over the border
 				{
-					if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-2).getY() > yTop) {
+					if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-1).getY() > yTop) {
 						y -= moveSpeed;
 						for (int i =0; i < GameLoop.Bil_R.size(); i++)
 		            	{
@@ -87,7 +87,7 @@ public class Cursor_R
 				}
 				else if (GameLoop.Bil_R.size() > 0)
 				{
-					if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-2).getX() < xRight) { // gets the location of random wall and tests if it would go over the border
+					if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-1).getX() < xRight) { // gets the location of random wall and tests if it would go over the border
 						x += moveSpeed;
 						for (int i =0; i < GameLoop.Bil_R.size(); i++)
 		            	{
@@ -109,7 +109,7 @@ public class Cursor_R
 				}
 				else if (GameLoop.Bil_R.size() > 0)
 				{
-					if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-2).getY() < yBottom) { // gets the location of random wall and tests if it would go over the border
+					if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-1).getY() < yBottom) { // gets the location of random wall and tests if it would go over the border
 						y += moveSpeed;
 						for (int i =0; i < GameLoop.Bil_R.size(); i++)
 		            	{
@@ -130,7 +130,7 @@ public class Cursor_R
 					}
 					else if (GameLoop.Bil_R.size() > 0)
 					{
-						if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-2).getX() > xLeft) { // gets the location of random wall and tests if it would go over the border
+						if (GameLoop.Bil_R.get(GameLoop.Bil_R.size()-1).getX() > xLeft) { // gets the location of random wall and tests if it would go over the border
 							x -= moveSpeed;
 							for (int i =0; i < GameLoop.Bil_R.size(); i++)
 			            	{
