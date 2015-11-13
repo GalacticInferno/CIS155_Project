@@ -12,6 +12,7 @@ import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
 class bitmapobjectstextures
 {
+	public static int Banner_tex[] = new int[3];
 	public static int B_tex[] = new int[3];
 	public static int Black_tex[] = new int[3];
 	public static int Boat_ai_tex[] = new int[3];

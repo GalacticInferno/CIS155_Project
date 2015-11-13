@@ -13,8 +13,18 @@ public class Cannonball_R
 	
 	public int x;
     public int y;
+    public double xD;
+    public double yD;
     public int sizex;
     public int sizey;
+    public int destination_x;
+    public int destination_y;
+    double  diagonal;
+    double xSpeed;
+    double ySpeed;
+    int initCalc = 0;  // for initial direction calculation
+    double totalDistance;
+    double movSpeed = 1;
 	
 	public Cannonball_R (int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -30,10 +40,69 @@ public class Cannonball_R
 		texture = bitmapobjectstextures.Cannonball_R_tex;
 	}
 	
+	public void calcMov() 
+	{
+			diagonal = Math.sqrt(Math.pow(Math.abs(x-destination_x), 2) + Math.pow(Math.abs(y-destination_y), 2));
+			xSpeed = (x-destination_x)/(diagonal/10);
+			ySpeed = (y-destination_y)/(diagonal/10);
+			if ( initCalc == 0)
+				totalDistance = diagonal/10;
+	
+	}
+	
 	public void update()
 	{
-		
+
+		if ((x != destination_x && y != destination_y)) 
+		{
+			x -= xSpeed * movSpeed;
+			y -= ySpeed * movSpeed;
+			initCalc++; // disables initial distance calculation
+			calcMov();   // adjust direction
+		}
+		if (x == destination_x && y != destination_y)
+		{
+			y -= ySpeed * movSpeed;
+		}
+		if (x != destination_x && y == destination_y)
+		{
+			x -= xSpeed * movSpeed;
+		}
 	}
+	public int getX() 
+	{
+		return x;
+	}
+	public int getY() 
+	{
+		return y;
+	}
+	public int getDestiX() 
+	{
+		return destination_x;
+	}
+	public int getDestiY() 
+	{
+		return destination_y;
+	}
+	// set x location of cannon
+		public void setX(int setX) 
+		{
+			x = setX;
+		}
+		// set y location of cannon
+		public void setY(int setY) 
+		{
+			y = setY;
+		}
+		public void setDestinationX(int setDestiX)
+		{
+			destination_x = setDestiX;
+		}
+		public void setDestinationY(int setDestiY)
+		{
+			destination_y = setDestiY;
+		}
 	
 	public void draw()
     {

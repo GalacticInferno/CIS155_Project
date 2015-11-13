@@ -19,6 +19,13 @@ public class Cursor_B
     public int sizex;
     public int sizey;
 	public int keyPressed;
+	public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
+	public int wallX;
+	public int wallY;
 	
 	public Cursor_B(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -47,34 +54,118 @@ public class Cursor_B
 		 * 69 = e
 		 */
 		keyPressed = key;
-		switch(keyPressed){
-		case 0:
-			break;
-		case 87:
-			y -= 32;
-			break;
-		case 68:
-			x += 32;
-			break;
-		case 83:
-			y += 32;
-			break;
-		case 65:
-			x -= 32;
-			break;
-		case 81:
-			break;
-		case 69:
-			break;
-		
-		}
+			switch(keyPressed){
+			case 0:
+				break;
+			case 87:
+				if (y > yTop ) {
+					if ( GameLoop.Bil_B.size() == 0) { // moves if no random wall exists
+						y -= moveSpeed;
+						for (int i =0; i < GameLoop.Bil_B.size(); i++)
+		            	{
+		            		GameLoop.Bil_B.get(i).update(key);
+		            	}
+					}
+					else if (GameLoop.Bil_B.size() > 0)  // gets the location of random wall and tests if it would go over the border
+					{
+						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getY() > yTop) {
+							y -= moveSpeed;
+							for (int i =0; i < GameLoop.Bil_B.size(); i++)
+			            	{
+			            		GameLoop.Bil_B.get(i).update(key);
+			            	}
+						}			
+					}
+				}
+				break;
+			case 68:
+				if (x < xRight) {
+					if ( GameLoop.Bil_B.size() == 0) { // moves if no random wall exists
+						x += moveSpeed;
+						for (int i =0; i < GameLoop.Bil_B.size(); i++)
+		            	{
+		            		GameLoop.Bil_B.get(i).update(key);
+		            	}
+					}
+					else if (GameLoop.Bil_B.size() > 0)
+					{
+						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getX() < xRight) { // gets the location of random wall and tests if it would go over the border
+							x += moveSpeed;
+							for (int i =0; i < GameLoop.Bil_B.size(); i++)
+			            	{
+			            		GameLoop.Bil_B.get(i).update(key);
+			            	}
+						}			
+					}
+				}
+				break;
+			case 83:
+				if (y<yBottom){
+					//y += moveSpeed;
+					if ( GameLoop.Bil_B.size() == 0) { // moves if no random wall exists
+						y += moveSpeed;
+						for (int i =0; i < GameLoop.Bil_B.size(); i++)
+		            	{
+		            		GameLoop.Bil_B.get(i).update(key);
+		            	}
+					}
+					else if (GameLoop.Bil_B.size() > 0)
+					{
+						if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getY() < yBottom) { // gets the location of random wall and tests if it would go over the border
+							y += moveSpeed;
+							for (int i =0; i < GameLoop.Bil_B.size(); i++)
+			            	{
+			            		GameLoop.Bil_B.get(i).update(key);
+			            	}
+						}			
+					}
+				}
+				break;
+			case 65:
+				if(x>xLeft){
+						if ( GameLoop.Bil_B.size() == 0) { // moves if no random wall exists
+							x -= moveSpeed;
+							for (int i =0; i < GameLoop.Bil_B.size(); i++)
+			            	{
+			            		GameLoop.Bil_B.get(i).update(key);
+			            	}
+						}
+						else if (GameLoop.Bil_B.size() > 0)
+						{
+							if (GameLoop.Bil_B.get(GameLoop.Bil_B.size()-2).getX() > xLeft) { // gets the location of random wall and tests if it would go over the border
+								x -= moveSpeed;
+								for (int i =0; i < GameLoop.Bil_B.size(); i++)
+				            	{
+				            		GameLoop.Bil_B.get(i).update(key);
+				            	}
+							}			
+						}
+				}
+				break;
+			case 81:
+				break;
+			case 69:
+				break;
+			
+			}
 	} 
 	
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);
     }
-    
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setWallX(int x) {
+		wallX = x;
+	}
+public void setWallY(int y) {
+		wallY = y;
+	}
 	private void square(int x , int y , int sizex, int sizey)
     {
     	glBindTexture(GL11.GL_TEXTURE_2D, texture[0]);

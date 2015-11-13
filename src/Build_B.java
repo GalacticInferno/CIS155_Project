@@ -17,6 +17,12 @@ public class Build_B
     public int y;
     public int sizex;
     public int sizey;
+    public int keyPressed;
+	public int moveSpeed = 32;
+	public int yTop = 16;
+	public int yBottom = 864;
+	public int xLeft = 16;
+	public int xRight = 1248;
 	
 	public Build_B(int x1 , int y1 , int sizex1, int sizey1)
 	{
@@ -32,11 +38,66 @@ public class Build_B
 		texture = bitmapobjectstextures.Build_B_tex;
 	}
 	
-	public void update()
+	public void update(int key)
 	{
-		
+		/*
+		 * KEY MAPP
+		 * 0 = no key pressed
+		 * 87 = W
+		 * 68 = d
+		 * 83 = s
+		 * 65 = a
+		 * 81 = q
+		 * 69 = e
+		 */
+		keyPressed = key;
+			switch(keyPressed){
+			case 0:
+				break;
+			case 87:
+				if (y > yTop ) {
+						y -= moveSpeed;
+				}
+				break;
+			case 68:
+				if (x < xRight) {
+					x += moveSpeed;
+				}
+				break;
+			case 83:
+				if (y<yBottom){
+					y += moveSpeed;
+				}
+				break;
+			case 65:
+				if(x>xLeft){
+					x -= moveSpeed;
+				}
+				break;
+			case 81:
+				
+				break;
+			case 69:
+				break;
+			
+			}
+	} 
+	public int getX() 
+	{
+		return x;
 	}
-	
+	public int getY() 
+	{
+		return y;
+	}
+	public void setX(int setX) 
+	{
+		x = setX;
+	}
+	public void setY(int setY) 
+	{
+		y = setY;
+	}
 	public void draw()
     {
     	square(x ,y ,sizex, sizey);
