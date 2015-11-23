@@ -22,9 +22,33 @@ public class Debug
 			System.out.println(x);
 	}
 	
+	public void debugLong(Long x)
+	{
+		if(debug)
+			System.out.println(x);
+	}
+	
 	public void debugInt2(Integer x, Integer y)
 	{
 		if(debug)
 			System.out.println(x + ":" + y);
+	}
+	
+	public void debugDouble(Double x)
+	{
+		if(debug)
+			System.out.println(x);
+	}
+	
+	public void debugDoubleWithString(Double x, String s)
+	{
+		if(debug)
+			System.out.println(s + x);
+	}
+	
+	public void debugIntegerWithString(Integer x, String s)
+	{
+		if(debug)
+			System.out.println(s + x);
 	}
 }
