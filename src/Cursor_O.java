@@ -19,8 +19,8 @@ public class Cursor_O
     public int sizey;
     public int keyPressed = 0;
     public int moveSpeed = 32;
-	public int yTop = 16;
-	public int yBottom = 864;
+	public int yTop = 96;
+	public int yBottom = 960;
 	public int xLeft = 16;
 	public int xRight = 1248;
 	
@@ -41,6 +41,18 @@ public class Cursor_O
 	
 	public void update(int key)
 	{
+		if(GameLoop.cannonPhase || GameLoop.buildPhase) {
+			 yTop = 608;
+			 yBottom = 960;
+			 xLeft = 224;
+			 xRight = 864;
+		}
+		else {
+			yTop = 96;
+			yBottom = 960;
+			xLeft = 16;
+			xRight = 1248;
+		}
 		/*
 		 * KEY MAPP
 		 * 0 = no key pressed
@@ -152,6 +164,12 @@ public class Cursor_O
 	}
 	public int getY() {
 		return y;
+	}
+	public void setX(int setX) {
+		 x = setX;
+	}
+	public void setY(int setY) {
+	y = setY;
 	}
 	public void draw()
     {

@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit;
+
 /**
  * 
  */
@@ -17,7 +19,7 @@ public class FloodFill
 	// screen width
 	public static int roomWidth = 1280;
 	// screen height
-	public static int roomHeight = 869 + 96;
+	public static int roomHeight = 869 + GameLoop.underBanner;
 	
 	// field for flooding
 	private static int fieldWidth = roomWidth/blockSize;
@@ -26,7 +28,7 @@ public class FloodFill
 	// Holds the state of blocks
 	// True = Flood-able
 	// False = Wall
-	private static boolean check[][] = new boolean[fieldWidth][fieldHeight];
+	private static boolean check[][] = new boolean[roomWidth][roomHeight];
 	
 	// GameLoop Stuff (Castles & Walls)
 	GameLoop gl = new GameLoop();
@@ -38,6 +40,8 @@ public class FloodFill
 	// Gets called from GameLoop
 	public void floodFill()
 	{
+		db.debugString("flood_1");
+		
 		map();
 		blueFlood();
 		orangeFlood();
@@ -54,9 +58,9 @@ public class FloodFill
 	// sets map blocks to true
 	private void mapOpen()
 	{
-		for(int i = 0; i < fieldWidth; i++)
+		for(int i = 0; i < roomWidth; i++)
 		{
-			for(int j = 0; j < fieldHeight; j++)
+			for(int j = 0; j < roomHeight; j++)
 			{
 				check[i][j] = true;
 			}
@@ -68,6 +72,15 @@ public class FloodFill
 	// sets wall blocks to false
 	private void mapClose()
 	{
+		// sets banner locations to closed
+		for(int i = 0; i < (roomWidth / blockSize) ; i++)
+		{ 
+			for(int j = 0; j < (GameLoop.underBanner / blockSize); j++)
+			{
+				check[i][j] = false;
+			}
+		}
+				
 		// sets blue walls as closed
 		for(int i = 0; i < GameLoop.Wal_B.size(); i++)
 		{
@@ -131,6 +144,9 @@ public class FloodFill
 	// FLOOD IT ALL !!! AHAHAHAHAHHAHAHA!!!!
 	private void flood(int x, int y, int c, int b, int o, int r)
 	{
+		
+		db.debugString("flood_2");
+		
 		// gets block coords
 		x /= blockSize;
 		y /= blockSize;
@@ -140,31 +156,42 @@ public class FloodFill
 			return;
 		if(y < 0)
 			return;
-		
-		db.debugInt2(x, y);
-		
-		// checks to see if block has already been colored
-		if(!check[x][y])
+
+		if(x > (roomWidth / 32))
+			return;
+		if(y > (roomHeight / 32))
 			return;
 		
+		db.debugInt2(x, y);
+			
 		// Clears drawing if its not contained in walls
-		if(b > 60)
-		{
+		if(b > 70)
+		{			
+			GameLoop.Blue.clear();
+			GameLoop.Blue.clear();
 			GameLoop.Blue.clear();
 			return;
 		}
 		
-		if(o > 60)
+		if(o > 70)
 		{
+			GameLoop.Orange.clear();
+			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
 			return;
 		}
 		
-		if(r > 60)
+		if(r > 70)
 		{
+			GameLoop.Red.clear();
+			GameLoop.Red.clear();
 			GameLoop.Red.clear();
 			return;
 		}
+		
+		// checks to see if block has already been colored
+		if(!check[x][y])
+			return;
 		
 		// Draw depending on which castle is calling  the method
 		// Recursion !!!

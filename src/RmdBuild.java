@@ -277,4 +277,47 @@ public class RmdBuild {
 		//System.out.println(rmdLocation3);
 		
 	}
+	public static void remove_Build() {
+		// remove blue build
+		for (int i = 0; i < GameLoop.Bil_B.size(); i++) 
+		{
+			GameLoop.Bil_B.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_B.size(); i++) 
+		{
+			GameLoop.Bil_B.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_B.size(); i++) 
+		{
+			GameLoop.Bil_B.remove(i);
+		}
+		// remove red build
+		for (int i = 0; i < GameLoop.Bil_R.size(); i++) 
+		{
+			GameLoop.Bil_R.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_R.size(); i++) 
+		{
+			GameLoop.Bil_R.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_R.size(); i++) 
+		{
+			GameLoop.Bil_R.remove(i);
+		}
+		// remove orange build
+		for (int i = 0; i < GameLoop.Bil_O.size(); i++) 
+		{
+			GameLoop.Bil_O.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_O.size(); i++) 
+		{
+			GameLoop.Bil_O.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_O.size(); i++) 
+		{
+			GameLoop.Bil_O.remove(i);
+		}
+		
+	
+	}
 }

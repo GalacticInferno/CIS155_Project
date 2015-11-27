@@ -8,14 +8,30 @@ import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 import java.util.Random;
-
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
 
-public class GameLoop 
+public class GameLoop
 {	
+	//Game parameters
+	static public boolean startGame = false;
+	static public boolean cannonPhase = false;
+	static public boolean battlePhase = false;
+	static public boolean buildPhase = false;
+	static public boolean endGame = false;
+	
+	private double fpsCounter = 0;
+	private double lastTime;
+	private double deltaTime;
+	private double accumTime = 0;
+	
 	Cannonball_create cannonball_create;
 	// creates input as a KeyEvent class
 	private int keyPressed = 0;
@@ -133,6 +149,11 @@ public class GameLoop
 	public static ArrayList<Cannonball_O> Cannonball_O = new ArrayList<Cannonball_O>();
 	public static ArrayList<Cannonball_R> Cannonball_R = new ArrayList<Cannonball_R>();
 	
+	public GameLoop()
+	{
+		lastTime = (double) System.currentTimeMillis() / 1000.0;
+	}
+	
 	private void loadtex()
 	{
 		bitmapobjectstextures.Banner_tex = loadtextures.load("Banner");
@@ -203,41 +224,26 @@ public class GameLoop
 		Wal_B.add(new Wall_B(0, 160 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(0, 128 + underBanner, 0, 0));
 		
-		Wal_R.add(new Wall_R(32, 64 + underBanner, 0, 0));
-		Wal_O.add(new Wall_O(64, 64 + underBanner, 0, 0));
-		Wal_N.add(new Wall_N(96, 64 + underBanner, 0, 0));
-		Wal_D.add(new Wall_D(128, 64 + underBanner, 0, 0));
-		Cas_B.add(new Castle_B(96, 160 + underBanner, 0, 0));
-		Cas_R.add(new Castle_R(64, 0 + underBanner, 0, 0));
-		Cas_O.add(new Castle_O(128, 0 + underBanner, 0, 0));
-		Cas_N.add(new Castle_N(192, 0 + underBanner, 0, 0));
-		Can_B.add(new Cannon_B(256, 0 + underBanner, 0, 0));
-		Can_R.add(new Cannon_R(320, 0 + underBanner, 0, 0));
-		Can_O.add(new Cannon_O(384, 0 + underBanner, 0, 0));
-		Can_N.add(new Cannon_N(448, 0 + underBanner, 0, 0));
-		Boat.add(new Boat_ai(512, 0 + underBanner, 0, 0));
-		Blue.add(new B(352, 64 + underBanner, 0, 0));
-		Red.add(new R(384, 64 + underBanner, 0, 0));
-		Orange.add(new O(416, 64 + underBanner, 0, 0));
-		Black.add(new Black(448, 64 + underBanner, 0, 0));
+		Cas_B.add(new Castle_B(128, 160 + underBanner, 0, 0));
+		Cas_R.add(new Castle_R(1088, 160 + underBanner, 0, 0));
+		Cas_O.add(new Castle_O(544, 640 + underBanner, 0, 0));
+		//Cas_N.add(new Castle_N(192, 0 + underBanner, 0, 0));
+		//Can_B.add(new Cannon_B(256, 0 + underBanner, 0, 0));
+		//Can_R.add(new Cannon_R(320, 0 + underBanner, 0, 0));
+		//Can_O.add(new Cannon_O(384, 0 + underBanner, 0, 0));
+		//Can_N.add(new Cannon_N(448, 0 + underBanner, 0, 0));
+		//Boat.add(new Boat_ai(512, 0 + underBanner, 0, 0));
 		
 		//Cursors
-		Cur_B.add(new Cursor_B(160, 64 + underBanner, 0, 0));
-		Cur_R.add(new Cursor_R(192, 64 + underBanner, 0, 0));
-		Cur_O.add(new Cursor_O(224, 64 + underBanner, 0, 0));
-		Bil_B.add(new Build_B(256, 64 + underBanner, 0, 0));
-		Bil_R.add(new Build_R(288, 64 + underBanner, 0, 0));
-		Bil_O.add(new Build_O(320, 64 + underBanner, 0, 0));
+		Cur_B.add(new Cursor_B(128, 160 + underBanner, 0, 0));
+		Cur_R.add(new Cursor_R(1088, 160 + underBanner, 0, 0));
+		Cur_O.add(new Cursor_O(544, 640 + underBanner, 0, 0));
 	}
 
 	public void draw()
 	{
 		
-		// Last Drawn Item in list is top...
-		for(int i = 0; i<Banner.size(); i++)
-		{
-			Banner.get(i).draw();
-		}	
+		// Last Drawn Item in list is top...	
 		for(int i = 0; i<World.size(); i++)
 		{
 			World.get(i).draw();
@@ -268,6 +274,23 @@ public class GameLoop
 			Wal_D.get(i).draw();
 		}
 		
+		for(int i = 0; i<Blue.size(); i++)
+		{
+			Blue.get(i).draw();
+		}
+		for(int i = 0; i<Red.size(); i++)
+		{
+			Red.get(i).draw();
+		}
+		for(int i = 0; i<Orange.size(); i++)
+		{
+			Orange.get(i).draw();
+		}
+		for(int i = 0; i<Black.size(); i++)
+		{
+			Black.get(i).draw();
+		}
+		
 		//Draw all Boats in list
 		for(int i = 0; i<Boat.size(); i++)
 		{
@@ -294,7 +317,7 @@ public class GameLoop
 			Can_N.get(i).draw();
 		}
 		
-		for(int i = 0; i<Blue.size(); i++)
+		/*for(int i = 0; i<Blue.size(); i++)
 		{
 			Blue.get(i).draw();
 		}
@@ -309,7 +332,7 @@ public class GameLoop
 		for(int i = 0; i<Black.size(); i++)
 		{
 			Black.get(i).draw();
-		}
+		}*/
 		
 		//Draw all Blue Castles in list
 		for(int i = 0; i<Cas_B.size(); i++)
@@ -357,6 +380,12 @@ public class GameLoop
 		{
 			Bil_O.get(i).draw();
 		}
+		// Banner
+		for(int i = 0; i<Banner.size(); i++)
+		{
+			Banner.get(i).draw();
+		}
+		
 		//cannon balls must also be on top
 		for(int i = 0; i<Ball.size(); i++)
 		{
@@ -385,61 +414,142 @@ public class GameLoop
 	public void update(long window)
 	{	
 		FloodFill ff = new FloodFill();
+		Debug debug = new Debug();
+		int fps;
 		
-		// get start time for timing shooting.
-		Cannonball_create.startTime_P1_ball = System.currentTimeMillis();
-		Cannonball_create.startTime_P2_ball = System.currentTimeMillis();
-		Cannonball_create.startTime_P3_ball = System.currentTimeMillis(); 
+		double currentTime = (double)System.currentTimeMillis() / 1000.0;
+		deltaTime =   currentTime - lastTime;
+		lastTime =  currentTime;
 		
-		keyInput(window); // scan for input
-
+		accumTime += deltaTime;
+		//debug.debugDoubleWithString(fps, "fps:");
 		
-		ff.floodFill();
+		fps = (int) (1.0 / deltaTime);
 		
-		//------BLUE-----------
-		cannonball_B(Can_B.size());   // counts and creates blue cannon and shots to destination (destination is set by player cursor)
-		// updates the cannonball array for BLUE
-		for (int i = 0; i < Cannonball_B.size() ; i++)
+		fpsCounter += fps;
+		debug.debugInt(fps);
+		
+		debug.debugDoubleWithString(fpsCounter, "fpsCounter:");
+		debug.debugDoubleWithString(accumTime, "accumTime:");
+		debug.debugDoubleWithString(deltaTime, "deltaTime:");
+		keyInput(window);
+		//----------------Select First Castle -------------------------//
+		if(startGame)
 		{
-			Cannonball_B.get(i).update();
+			
 		}
-		// removes the blue ball when target is hit
-		//cannonball_B_remove(Cannonball_B.size());
-		//-------------END BLUE-----------
 		
-		// blue
-		PlaceWall.checkForWall_B();  // checks if wall can be build
-		PlaceWall.checkForCannon_B();
-		PlaceWall.checkForCastle_B();
-		// red
-		PlaceWall.checkForWall_R();
-		PlaceWall.checkForCannon_R();
-		PlaceWall.checkForCastle_R();
-		// orange
-		PlaceWall.checkForWall_O();
-		PlaceWall.checkForCannon_O();
-		PlaceWall.checkForCastle_O();
+		//-------------------Cannon Place------------------------------//
 		
-		//--------------ORANGE------
-		//cannonball_O(Can_O.size());   // counts and creates orange cannon and shots to destination (destination is set by player cursor)
-		// updates the cannonball array for orange
-		for (int i = 0; i < Cannonball_O.size() ; i++)
+		if(accumTime > 10 && accumTime < 20)
 		{
-			Cannonball_O.get(i).update();
+			if(accumTime > 10 && accumTime < 10.1) {
+				Cur_B.get(0).setX(128);
+				Cur_B.get(0).setY(160 + underBanner);
+				Cur_R.get(0).setX(1088);
+				Cur_R.get(0).setY(160 + underBanner);
+				Cur_O.get(0).setX(544);
+				Cur_O.get(0).setY(640 + underBanner);
+			}
+			// update up game parameters.
+			cannonPhase = true;
+			startGame = false;
+			battlePhase = false;
+			buildPhase = false;
+			endGame = false;
+			
+			//keyInput(window);
+			CannonPlace.checkCannon_collision();
+
 		}
-		// removes the orange ball when target is hit
-		//cannonball_O_remove(Cannonball_O.size());
-		//-----------END ORANGE -------
 		
-		cannonShot();   // cannon shooting 
-
+		//--------------------Battle Phase-----------------------------//
 		
-
-		Cannonball_N.add(new Cannonball_N(96, 96, 1, 1));
-		Cannonball_N.remove(0);
+		if(accumTime > 20 && accumTime < 30)
+		{
+			// update up game parameters.
+			cannonPhase = false;
+			startGame = false;
+			battlePhase = true;
+			buildPhase = false;
+			endGame = false;
+			//keyInput(window); // scan for input
+			
+			debug.debugString("FIRE!");
+			// get start time for timing shooting. 
+			Cannonball_create.startTime_P1_ball = System.currentTimeMillis();
+			Cannonball_create.startTime_P2_ball = System.currentTimeMillis();
+			Cannonball_create.startTime_P3_ball = System.currentTimeMillis();
+			
+			// cannon shooting 
+			cannonShot();
+		}
+		
+		//--------------------Wall Build-------------------------------//
+		
+		if(accumTime > 30 && accumTime < 40)
+		{	
+			remove_destoryed_wall();
+			
+			if(accumTime > 30 && accumTime < 30.1) {
+				Cur_B.get(0).setX(128);
+				Cur_B.get(0).setY(160 + underBanner);
+				Cur_R.get(0).setX(1088);
+				Cur_R.get(0).setY(160 + underBanner);
+				Cur_O.get(0).setX(544);
+				Cur_O.get(0).setY(640 + underBanner);
+				RmdBuild.rmd_wall_B();
+				RmdBuild.rmd_wall_R();
+				RmdBuild.rmd_wall_O();
+				ff.floodFill();
+			}
+			// update up game parameters.
+			cannonPhase = false;
+			startGame = false;
+			battlePhase = false;
+			buildPhase = true;
+			endGame = false;
+			
+			//keyInput(window); // scan for input
+			// checks if wall can be build
+			// blue
+			PlaceWall.checkForWall_B();
+			PlaceWall.checkForCannon_B();
+			PlaceWall.checkForCastle_B();
+			// red
+			PlaceWall.checkForWall_R();
+			PlaceWall.checkForCannon_R();
+			PlaceWall.checkForCastle_R();
+			// orange
+			PlaceWall.checkForWall_O();
+			PlaceWall.checkForCannon_O();
+			PlaceWall.checkForCastle_O();
+			
+			//ff.floodFill();
+		}
+		
+		debug.debugString("Quit");
+		debug.debugLong(System.currentTimeMillis());;
+		
+		//---------------------End Game--------------------------------//
+		if(endGame)
+		{
+			
+		}else
+		{
+			if (accumTime > 40) {
+				accumTime = 0;
+			cannonPhase = false;
+			startGame = false;
+			battlePhase = false;
+			buildPhase = false;
+			endGame = false;
+			// remove build
+			RmdBuild.remove_Build();
+			}
+		}
 	}
 // -------------------------------------- END OF GAME LOOP ---------------------------------
-	
 // Scan input for all Players.
 void keyInput(long window) {
 	final GLFWKeyCallback   key_Callback;
@@ -508,11 +618,16 @@ void keyInput(long window) {
             // E for placing WALL is not timed and therefore can be placed at any time.
             if ( key == GLFW_KEY_E && action == GLFW_PRESS )
             { 
-            		
-            		 PlaceWall.placewall_B();
+            		if(buildPhase) {
+            			PlaceWall.placewall_B();
+            			Cur_B.get(0).update(key);
+            		}
+            		 if(cannonPhase) {
+            			 CannonPlace.placeCannon_B();
+            		 }
             		// rmd_wall_B();
             		 //placewall_B();
-	            	Cur_B.get(0).update(key);
+	            	//Cur_B.get(0).update(key);
             }
             
             // IF KEY IS RELEASED NOTE: this might needs adjustment -->> more testing
@@ -599,11 +714,17 @@ void keyInput(long window) {
             		}
 	            
             }
-            // E for placing WALL is not timed and therefore can be placed at any time.
+            // Y for placing WALL is not timed and therefore can be placed at any time.
             if ( key == GLFW_KEY_Y && action == GLFW_PRESS )
             { 
+            	if(buildPhase) {
             		PlaceWall.placewall_O();
-	            	Cur_O.get(0).update(key);
+            		Cur_O.get(0).update(key);
+            	}
+            	 if(cannonPhase) {
+        			 CannonPlace.placeCannon_O();
+        		 }
+	            	//Cur_O.get(0).update(key);
             }
             
             // IF KEY IS RELEASED --> NOTE: adjustment might be needed
@@ -695,8 +816,14 @@ void keyInput(long window) {
             // E for placing WALL is not timed and therefore can be placed at any time.
             if ( key == GLFW_KEY_O && action == GLFW_PRESS )
             { 
+            	if (buildPhase) {
             		PlaceWall.placewall_R();
-	            	Cur_R.get(0).update(key);
+            		Cur_R.get(0).update(key);
+            	}
+            	 if(cannonPhase) {
+        			 CannonPlace.placeCannon_R();
+        		 }
+	            	//Cur_R.get(0).update(key);
             }
             
             // IF KEY IS RELEASED SAME as player 1 & 2
@@ -736,70 +863,7 @@ void keyInput(long window) {
     });
 }
 
-//---------------------------------------------------- CANNON BALL CREATION------------------------------------
-// create blue balls.
-void cannonball_B(int cannonCount) {
-	int destination_x;
-	int destination_y;
-	int original_x;
-	int original_y;
-	
-	if (ballCreation+endTime_P1_ball < startTime_P1_ball) {
-		for(int i = 0; i < cannonCount; i++){
-			destination_x = Cur_B.get(0).getX();
-			destination_y = Cur_B.get(0).getY();
-			original_x = Can_B.get(i).getX();
-			original_y = Can_B.get(i).getY();
-			Cannonball_B.add(new Cannonball_B(original_x, original_y, 1, 1));
-			Cannonball_B.get(countBall_B).setDestinationX(destination_x);
-			Cannonball_B.get(countBall_B).setDestinationY(destination_y);
-			countBall_B++;
-		}
-		endTime_P1_ball = System.currentTimeMillis();
-	}
-}
-//create orange balls
-void cannonball_O(int cannonCount) {
-	int destination_x;
-	int destination_y;
-	int original_x;
-	int original_y;
-	
-	if (ballCreation+endTime_P2_ball < startTime_P2_ball) {
-		for(int i = 0; i < cannonCount; i++){
-			destination_x = Cur_O.get(0).getX();
-			destination_y = Cur_O.get(0).getY();
-			original_x = Can_O.get(i).getX();
-			original_y = Can_O.get(i).getY();
-			Cannonball_O.add(new Cannonball_O(original_x, original_y, 1, 1));
-			Cannonball_O.get(countBall_O).setDestinationX(destination_x);
-			Cannonball_O.get(countBall_O).setDestinationY(destination_y);
-			countBall_O++;
-		}
-		endTime_P2_ball = System.currentTimeMillis();
-	}
-}
-// create red balls
-void cannonball_R(int cannonCount) {
-	int destination_x;
-	int destination_y;
-	int original_x;
-	int original_y;
-	
-	if (ballCreation+endTime_P3_ball < startTime_P3_ball) {
-		for(int i = 0; i < cannonCount; i++){
-			destination_x = Cur_R.get(0).getX();
-			destination_y = Cur_R.get(0).getY();
-			original_x = Cur_R.get(i).getX();
-			original_y = Cur_R.get(i).getY();
-			Cannonball_R.add(new Cannonball_R(original_x, original_y, 1, 1));
-			Cannonball_R.get(countBall_R).setDestinationX(destination_x);
-			Cannonball_R.get(countBall_R).setDestinationY(destination_y);
-			countBall_R++;
-		}
-		endTime_P3_ball = System.currentTimeMillis();
-	}
-}
+
 
 public void cannonShot() 
 {
@@ -847,5 +911,15 @@ void checkMov() {
 	}
 }
 ////// ADD class for checkfor wall build wall for all players.
-
+void remove_destoryed_wall() {
+	for (int i = 0; i < Wal_D.size(); i++) {
+		Wal_D.remove(i);
+	}
+	for (int i = 0; i < Wal_D.size(); i++) {
+		Wal_D.remove(i);
+	}
+	for (int i = 0; i < Wal_D.size(); i++) {
+		Wal_D.remove(i);
+	}
+}
 }

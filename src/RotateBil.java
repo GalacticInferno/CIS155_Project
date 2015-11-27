@@ -13,7 +13,7 @@ public class RotateBil {
 	// ORANGE
 	static double x0_O;
 	static double y0_O;
-	static public int yTop = 0;
+	static public int yTop = 96;
 	static public int yBottom = 864;
 	static public int xLeft = 0;
 	static public int xRight = 1248;

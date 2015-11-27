@@ -33,11 +33,16 @@ public class Cannonball_create {
 					destination_y = GameLoop.Cur_B.get(0).getY();
 					original_x = GameLoop.Can_B.get(i).getX();
 					original_y = GameLoop.Can_B.get(i).getY();
-					GameLoop.Cannonball_B.add(new Cannonball_B(original_x, original_y, 1, 1));
-					GameLoop.Cannonball_B.get(countBall_B).setDestinationX(destination_x);
-					GameLoop.Cannonball_B.get(countBall_B).setDestinationY(destination_y);
-					GameLoop.Cannonball_B.get(countBall_B).calcMov();
-					countBall_B++;
+					for (int j = 0; j < GameLoop.Blue.size(); j++) {
+						if ( original_x == GameLoop.Blue.get(j).getX() && original_y == GameLoop.Blue.get(j).getY()){
+							GameLoop.Cannonball_B.add(new Cannonball_B(original_x, original_y, 1, 1));
+							System.out.println("---------- HELLO:" + original_x + " " + GameLoop.Blue.get(j).getX());
+							GameLoop.Cannonball_B.get(countBall_B).setDestinationX(destination_x);
+							GameLoop.Cannonball_B.get(countBall_B).setDestinationY(destination_y);
+							countBall_B++;
+							j = GameLoop.Blue.size();
+						}
+					}
 				}
 			}
 			endTime_P1_ball = System.currentTimeMillis();
@@ -56,11 +61,16 @@ public class Cannonball_create {
 				destination_y = GameLoop.Cur_O.get(0).getY();
 				original_x = GameLoop.Can_O.get(i).getX();
 				original_y = GameLoop.Can_O.get(i).getY();
-				GameLoop.Cannonball_O.add(new Cannonball_O(original_x, original_y, 1, 1));
-				GameLoop.Cannonball_O.get(countBall_O).setDestinationX(destination_x);
-				GameLoop.Cannonball_O.get(countBall_O).setDestinationY(destination_y);
-				GameLoop.Cannonball_O.get(countBall_O).calcMov();
-				countBall_O++;
+				for (int j = 0; j < GameLoop.Orange.size(); j++) {
+					if ( original_x == GameLoop.Orange.get(j).getX() && original_y == GameLoop.Orange.get(j).getY()){
+						GameLoop.Cannonball_O.add(new Cannonball_O(original_x, original_y, 1, 1));
+						GameLoop.Cannonball_O.get(countBall_O).setDestinationX(destination_x);
+						GameLoop.Cannonball_O.get(countBall_O).setDestinationY(destination_y);
+						GameLoop.Cannonball_O.get(countBall_O).calcMov();
+						countBall_O++;
+						j = GameLoop.Orange.size();
+					}
+				}
 			}
 			endTime_P2_ball = System.currentTimeMillis();
 		}
@@ -78,11 +88,16 @@ public class Cannonball_create {
 				destination_y = GameLoop.Cur_R.get(0).getY();
 				original_x = GameLoop.Can_R.get(i).getX();
 				original_y = GameLoop.Can_R.get(i).getY();
-				GameLoop.Cannonball_R.add(new Cannonball_R(original_x, original_y, 1, 1));
-				GameLoop.Cannonball_R.get(countBall_R).setDestinationX(destination_x);
-				GameLoop.Cannonball_R.get(countBall_R).setDestinationY(destination_y);
-				GameLoop.Cannonball_R.get(countBall_R).calcMov();
-				countBall_R++;
+				for (int j = 0; j < GameLoop.Red.size(); j++) {
+					if ( original_x == GameLoop.Red.get(j).getX() && original_y == GameLoop.Red.get(j).getY()){
+						GameLoop.Cannonball_R.add(new Cannonball_R(original_x, original_y, 1, 1));
+						GameLoop.Cannonball_R.get(countBall_R).setDestinationX(destination_x);
+						GameLoop.Cannonball_R.get(countBall_R).setDestinationY(destination_y);
+						GameLoop.Cannonball_R.get(countBall_R).calcMov();
+						countBall_R++;
+						j = GameLoop.Red.size();
+					}
+				}
 			}
 			endTime_P3_ball = System.currentTimeMillis();
 		}
