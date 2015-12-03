@@ -10,6 +10,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class FloodFill 
 {
+	public boolean floodOnce = false;
+	public boolean floodBlue = true;
+	public boolean floodRed = true;
+	public boolean floodOrange = true;
 	// Holds blocks in the x and y (grid = blocks)
 	private static int blockX;
 	private static int blockY;
@@ -46,6 +50,7 @@ public class FloodFill
 		blueFlood();
 		orangeFlood();
 		redFlood();
+		floodOnce = true;
 	}
 	
 	// Generates the true/false map
@@ -170,6 +175,7 @@ public class FloodFill
 			GameLoop.Blue.clear();
 			GameLoop.Blue.clear();
 			GameLoop.Blue.clear();
+			floodBlue = false;
 			return;
 		}
 		
@@ -178,6 +184,7 @@ public class FloodFill
 			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
+			floodOrange = false;
 			return;
 		}
 		
@@ -186,6 +193,7 @@ public class FloodFill
 			GameLoop.Red.clear();
 			GameLoop.Red.clear();
 			GameLoop.Red.clear();
+			floodRed = false;
 			return;
 		}
 		
@@ -196,27 +204,36 @@ public class FloodFill
 		// Draw depending on which castle is calling  the method
 		// Recursion !!!
 		switch(c)
-		{
-			case 1: GameLoop.Blue.add(new B(x * blockSize, y * blockSize, 0, 0));
+		{	
+			case 1: 
+				if ( floodBlue == true) {
+				GameLoop.Blue.add(new B(x * blockSize, y * blockSize, 0, 0));
 						check[x][y] = false; 
-						flood((x - 1) * blockSize, y * blockSize, c, ++b, o, r);
-						flood((x + 1) * blockSize, y * blockSize, c, ++b, o, r);
-						flood(x * blockSize, (y - 1) * blockSize, c, ++b, o, r);
-						flood(x * blockSize, (y + 1) * blockSize, c, ++b, o, r);
+							flood((x - 1) * blockSize, y * blockSize, c, ++b, o, r);
+							flood((x + 1) * blockSize, y * blockSize, c, ++b, o, r);
+							flood(x * blockSize, (y - 1) * blockSize, c, ++b, o, r);
+							flood(x * blockSize, (y + 1) * blockSize, c, ++b, o, r);
+				}
 						break;
-			case 2: GameLoop.Orange.add(new O(x * blockSize, y * blockSize, 0, 0));
-						check[x][y] = false; 
-						flood((x - 1) * blockSize, y * blockSize, c, b, ++o, r);
-						flood((x + 1) * blockSize, y * blockSize, c, b, ++o, r);
-						flood(x * blockSize, (y - 1) * blockSize, c, b, ++o, r);
-						flood(x * blockSize, (y + 1) * blockSize, c, b, ++o, r);
+			case 2:
+				if ( floodOrange == true) {
+					GameLoop.Orange.add(new O(x * blockSize, y * blockSize, 0, 0));
+							check[x][y] = false; 
+							flood((x - 1) * blockSize, y * blockSize, c, b, ++o, r);
+							flood((x + 1) * blockSize, y * blockSize, c, b, ++o, r);
+							flood(x * blockSize, (y - 1) * blockSize, c, b, ++o, r);
+							flood(x * blockSize, (y + 1) * blockSize, c, b, ++o, r);
+				}
 						break;
-			case 3: GameLoop.Red.add(new R(x * blockSize, y * blockSize, 0, 0));
-						check[x][y] = false; 
-						flood((x - 1) * blockSize, y * blockSize, c, b, o, ++r);
-						flood((x + 1) * blockSize, y * blockSize, c, b, o, ++r);
-						flood(x * blockSize, (y - 1) * blockSize, c, b, o, ++r);
-						flood(x * blockSize, (y + 1) * blockSize, c, b, o, ++r);
+			case 3: 
+				if ( floodRed == true) {
+					GameLoop.Red.add(new R(x * blockSize, y * blockSize, 0, 0));
+							check[x][y] = false; 
+							flood((x - 1) * blockSize, y * blockSize, c, b, o, ++r);
+							flood((x + 1) * blockSize, y * blockSize, c, b, o, ++r);
+							flood(x * blockSize, (y - 1) * blockSize, c, b, o, ++r);
+							flood(x * blockSize, (y + 1) * blockSize, c, b, o, ++r);
+				}
 						break;
 		}
 	}

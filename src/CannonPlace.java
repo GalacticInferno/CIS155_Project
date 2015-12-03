@@ -1,6 +1,6 @@
-
+// by Markus Tamm
 public class CannonPlace {
-	// checks for wall
+	// checks for wall 
 		public static boolean placeCannon_B_1 = true;
 		public static boolean placeCannon_B_2 = true;
 		public static boolean placeCannon_B_3 = true;
@@ -28,7 +28,7 @@ public class CannonPlace {
 		public static int canSize = 63;
 		// player blue
 		public static void placeCannon_B() {
-
+				// if all true allow cannon placement
 				if (placeCannon_B_1 && placeCannon_B_2 && placeCannon_B_3 && placeCannon_B_4 && placeCannon_B_C && placeCannon_B_Ca && placeCannon_B_Co ) {
 					GameLoop.Can_B.add(new Cannon_B(GameLoop.Cur_B.get(0).getX(), GameLoop.Cur_B.get(0).getY(), 0, 0));
 				}
@@ -36,7 +36,7 @@ public class CannonPlace {
 				//RmdBuild.rmd_wall_B();
 			//}
 		}
-		
+		// checks for wall
 		public static void checkForWall_B() {
 			int test = 0;
 			if (GameLoop.Wal_B.size() == 0) {
@@ -121,6 +121,7 @@ public class CannonPlace {
 				}
 				}		
 		}
+		// check for castle
 		public static void checkForCastle_B() {
 			int test = 0;
 			if (GameLoop.Can_B.size() == 0) {

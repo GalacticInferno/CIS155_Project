@@ -1,3 +1,4 @@
+// by Markus Tamm
 import java.util.Random;
 
 public class Cannonball_create {
@@ -19,7 +20,7 @@ public class Cannonball_create {
 	
 	Cannonball_create() {
 	}
-	
+	// create cannonball blue
 	public static void cannonball_B(int cannonCount) {
 		int destination_x;
 		int destination_y;
@@ -27,8 +28,8 @@ public class Cannonball_create {
 		int original_y;
 		if (ballCreation+endTime_P1_ball < startTime_P1_ball) {
 			for(int i = 0; i < cannonCount; i++){
-			shot = rmd.nextInt(2)+1;
-				if ( shot > 1) {
+			//shot = rmd.nextInt(2)+1;
+				//if ( shot > 1) {
 					destination_x = GameLoop.Cur_B.get(0).getX();
 					destination_y = GameLoop.Cur_B.get(0).getY();
 					original_x = GameLoop.Can_B.get(i).getX();
@@ -42,13 +43,13 @@ public class Cannonball_create {
 							countBall_B++;
 							j = GameLoop.Blue.size();
 						}
-					}
+					//}
 				}
 			}
 			endTime_P1_ball = System.currentTimeMillis();
 		}
 	}
-
+	// create cannonball orange
 	public static void cannonball_O(int cannonCount) {
 		int destination_x;
 		int destination_y;
@@ -150,7 +151,7 @@ public class Cannonball_create {
 			}
 		} 
 	} 
-	 
+	 // remove orange ball
 	public static void cannonball_O_remove(int cannonCount)  {
 			int destination_x;
 			int destination_y;

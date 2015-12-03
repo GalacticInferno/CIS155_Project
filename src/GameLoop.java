@@ -207,7 +207,7 @@ public class GameLoop
 		Wal_B.add(new Wall_B(160, 96 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(192, 96 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
+		//Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 160 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 192 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 224 + underBanner, 0, 0));
@@ -223,6 +223,36 @@ public class GameLoop
 		Wal_B.add(new Wall_B(0, 192 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(0, 160 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(0, 128 + underBanner, 0, 0));
+		
+		// test flood
+		//
+		int setRed = 960;
+		Wal_R.add(new Wall_R(0 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(32 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(96 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(64 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(128 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(160 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(192 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(224 + setRed, 96 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(224 + setRed, 128 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(224 + setRed, 160 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(224 + setRed, 192 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(224 + setRed, 224 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(224 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(192 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(160 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(128 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(96 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(64 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(32 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(0 + setRed, 256 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(0 + setRed, 224 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(0 + setRed, 192 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(0 + setRed, 160 + underBanner, 0, 0));
+		Wal_R.add(new Wall_R(0 + setRed, 128 + underBanner, 0, 0));
+		
+		//
 		
 		Cas_B.add(new Castle_B(128, 160 + underBanner, 0, 0));
 		Cas_R.add(new Castle_R(1088, 160 + underBanner, 0, 0));
@@ -450,6 +480,15 @@ public class GameLoop
 				Cur_R.get(0).setY(160 + underBanner);
 				Cur_O.get(0).setX(544);
 				Cur_O.get(0).setY(640 + underBanner);
+				ff.floodOnce = false;
+			}
+			if(accumTime > 10.1 && accumTime < 10.2) {
+				if (ff.floodOnce == false) {
+					ff.floodFill();
+					ff.floodBlue = true;
+					ff.floodOrange = true;
+					ff.floodRed = true;
+				}
 			}
 			// update up game parameters.
 			cannonPhase = true;
@@ -489,9 +528,9 @@ public class GameLoop
 		
 		if(accumTime > 30 && accumTime < 40)
 		{	
-			remove_destoryed_wall();
+			//eremove_destoryed_wall();
 			
-			if(accumTime > 30 && accumTime < 30.1) {
+			if(accumTime > 30 && accumTime < 30.01) {
 				Cur_B.get(0).setX(128);
 				Cur_B.get(0).setY(160 + underBanner);
 				Cur_R.get(0).setX(1088);
@@ -501,7 +540,13 @@ public class GameLoop
 				RmdBuild.rmd_wall_B();
 				RmdBuild.rmd_wall_R();
 				RmdBuild.rmd_wall_O();
-				ff.floodFill();
+				
+				/* if (ff.floodOnce == false) {
+					ff.floodFill();
+					ff.floodBlue = true;
+					ff.floodOrange = true;
+					ff.floodRed = true;
+				} */
 			}
 			// update up game parameters.
 			cannonPhase = false;

@@ -1,3 +1,4 @@
+// by Markus Tamm
 public class PlaceWall {
 	// checks for wall
 	public static boolean placeWall_B = true;   
