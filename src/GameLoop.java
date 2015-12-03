@@ -207,7 +207,7 @@ public class GameLoop
 		Wal_B.add(new Wall_B(160, 96 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(192, 96 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 96 + underBanner, 0, 0));
-		//Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
+		Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 160 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 192 + underBanner, 0, 0));
 		Wal_B.add(new Wall_B(224, 224 + underBanner, 0, 0));
@@ -471,9 +471,9 @@ public class GameLoop
 		
 		//-------------------Cannon Place------------------------------//
 		
-		if(accumTime > 10 && accumTime < 20)
+		if(accumTime > 5 && accumTime < 20)
 		{
-			if(accumTime > 10 && accumTime < 10.1) {
+			if(accumTime > 5 && accumTime < 5.1) {
 				Cur_B.get(0).setX(128);
 				Cur_B.get(0).setY(160 + underBanner);
 				Cur_R.get(0).setX(1088);
@@ -482,7 +482,7 @@ public class GameLoop
 				Cur_O.get(0).setY(640 + underBanner);
 				ff.floodOnce = false;
 			}
-			if(accumTime > 10.1 && accumTime < 10.2) {
+			if(accumTime > 5.1 && accumTime < 5.2) {
 				if (ff.floodOnce == false) {
 					ff.floodFill();
 					ff.floodBlue = true;
@@ -504,7 +504,7 @@ public class GameLoop
 		
 		//--------------------Battle Phase-----------------------------//
 		
-		if(accumTime > 20 && accumTime < 30)
+		if(accumTime > 20 && accumTime < 35)
 		{
 			// update up game parameters.
 			cannonPhase = false;
@@ -526,11 +526,10 @@ public class GameLoop
 		
 		//--------------------Wall Build-------------------------------//
 		
-		if(accumTime > 30 && accumTime < 40)
+		if(accumTime > 35 && accumTime < 65)
 		{	
-			//eremove_destoryed_wall();
-			
-			if(accumTime > 30 && accumTime < 30.01) {
+			remove_destoryed_wall();
+			if(accumTime > 35 && accumTime < 35.01) {
 				Cur_B.get(0).setX(128);
 				Cur_B.get(0).setY(160 + underBanner);
 				Cur_R.get(0).setX(1088);
@@ -548,6 +547,16 @@ public class GameLoop
 					ff.floodRed = true;
 				} */
 			}
+			if(accumTime > 35.1 && accumTime < 35.2) {
+				if (ff.floodOnce == false) {
+					ff.floodFill();
+					ff.floodBlue = true;
+					ff.floodOrange = true;
+					ff.floodRed = true;
+				}
+			}
+			
+			
 			// update up game parameters.
 			cannonPhase = false;
 			startGame = false;
@@ -582,7 +591,7 @@ public class GameLoop
 			
 		}else
 		{
-			if (accumTime > 40) {
+			if (accumTime > 65) {
 				accumTime = 0;
 			cannonPhase = false;
 			startGame = false;
@@ -919,6 +928,7 @@ public void cannonShot()
 			for (int i = 0; i < Cannonball_B.size() ; i++)
 			{
 				Cannonball_B.get(i).update();
+				System.out.println("xSpeed: " + Cannonball_B.get(i).xSpeed);
 			}
 			// removes the blue ball when target is hit
 			Cannonball_create.cannonball_B_remove(Cannonball_B.size());
