@@ -21,10 +21,6 @@ public class FloodFill
 	// screen height
 	public static int roomHeight = 869 + GameLoop.underBanner;
 	
-	// field for flooding
-	private static int fieldWidth = roomWidth/blockSize;
-	private static int fieldHeight = roomHeight/blockSize;
-	
 	// Holds the state of blocks
 	// True = Flood-able
 	// False = Wall
@@ -40,9 +36,24 @@ public class FloodFill
 	// Gets called from GameLoop
 	public void floodFill()
 	{
-		db.debugString("flood_1");
-		
+		// Creates a true/false map for flooding
 		map();
+		
+		// Due to recursion, we have to clear the list if it gets to big
+		if(GameLoop.Blue.size() > 200)
+		{
+			GameLoop.Blue.clear();
+		}
+		if(GameLoop.Orange.size() > 200)
+		{
+			GameLoop.Orange.clear();
+		}
+		if(GameLoop.Red.size() > 200)
+		{
+			GameLoop.Red.clear();
+		}
+		
+		// Floods for each color
 		blueFlood();
 		orangeFlood();
 		redFlood();
@@ -162,8 +173,11 @@ public class FloodFill
 		if(y > (roomHeight / 32))
 			return;
 		
+		// checks to see if block has already been colored
+		if(!check[x][y])
+			return;
 		db.debugInt2(x, y);
-			
+		
 		// Clears drawing if its not contained in walls
 		if(b > 70)
 		{			
@@ -183,18 +197,16 @@ public class FloodFill
 		
 		if(r > 70)
 		{
-			GameLoop.Red.clear();
-			GameLoop.Red.clear();
-			GameLoop.Red.clear();
+			while(!GameLoop.Red.isEmpty())
+			{
+				GameLoop.Red.clear();
+			}
 			return;
 		}
 		
-		// checks to see if block has already been colored
-		if(!check[x][y])
-			return;
-		
 		// Draw depending on which castle is calling  the method
 		// Recursion !!!
+		
 		switch(c)
 		{
 			case 1: GameLoop.Blue.add(new B(x * blockSize, y * blockSize, 0, 0));

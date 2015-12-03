@@ -22,15 +22,16 @@ public class GameLoop
 {	
 	//Game parameters
 	private boolean startGame = true;
-	private boolean cannonPhase = true;
-	private boolean battlePhase = true;
-	private boolean buildPhase = true;
-	private boolean endGame = false;
+	private boolean first = true;
+	private boolean blueFailed = false;
+	private boolean redFailed = false;
+	private boolean orangeFailed = false;
 	
 	private double fpsCounter = 0;
 	private double lastTime;
 	private double deltaTime;
 	private double accumTime = 0;
+	private int currentRound = 0;
 	
 	Cannonball_create cannonball_create;
 	// creates input as a KeyEvent class
@@ -195,44 +196,16 @@ public class GameLoop
 		loadtex();
 		
 		//All items here will be run once at start
-		//                  X   Y
+		//                    X Y
 		Banner.add(new Banner(0,0,0,0));
 		World.add(new World(0, 0 + underBanner, 0, 0));
-		
-		Wal_B.add(new Wall_B(0, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(32, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(96, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(64, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(128, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(160, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(192, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 160 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 192 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 224 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(192, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(160, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(128, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(96, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(64, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(32, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 224 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 192 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 160 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 128 + underBanner, 0, 0));
 		
 		Cas_B.add(new Castle_B(96, 160 + underBanner, 0, 0));
 		Cas_R.add(new Castle_R(960, 160 + underBanner, 0, 0));
 		Cas_O.add(new Castle_O(512, 512 + underBanner, 0, 0));
-		Cas_N.add(new Castle_N(192, 0 + underBanner, 0, 0));
 		Can_B.add(new Cannon_B(256, 0 + underBanner, 0, 0));
 		Can_R.add(new Cannon_R(320, 0 + underBanner, 0, 0));
 		Can_O.add(new Cannon_O(384, 0 + underBanner, 0, 0));
-		Can_N.add(new Cannon_N(448, 0 + underBanner, 0, 0));
-		Boat.add(new Boat_ai(512, 0 + underBanner, 0, 0));
 		
 		//Cursors
 		Cur_B.add(new Cursor_B(160, 64 + underBanner, 0, 0));
@@ -398,27 +371,55 @@ public class GameLoop
 	{	
 		FloodFill ff = new FloodFill();
 		Debug debug = new Debug();
-		int fps;
+		initWall iw = new initWall();
+		cleaning clean = new cleaning();
+		//int fps;
 		
 		double currentTime = (double)System.currentTimeMillis() / 1000.0;
 		deltaTime =   currentTime - lastTime;
 		lastTime =  currentTime;
 		
 		accumTime += deltaTime;
-		//debug.debugDoubleWithString(fps, "fps:");
 		
-		fps = (int) (1.0 / deltaTime);
-		
-		fpsCounter += fps;
-		debug.debugInt(fps);
-		
-		debug.debugDoubleWithString(fpsCounter, "fpsCounter:");
 		debug.debugDoubleWithString(accumTime, "accumTime:");
 		debug.debugDoubleWithString(deltaTime, "deltaTime:");
 		//----------------Select First Castle -------------------------//
 		if(startGame)
-		{
-			
+		{	
+			if(first)
+			{
+				System.out.println("Starting...1");
+				
+				iw.wallCas(Cas_B.get(0).x, Cas_B.get(0).y, 1);
+				iw.wallCas(Cas_R.get(0).x, Cas_B.get(0).y, 2);
+				iw.wallCas(512, (512 + underBanner), 3);
+				
+				ff.floodFill();
+				
+				first = false;
+			}
+				
+			if(accumTime > 2 && accumTime < 2.1)
+				System.out.println("Starting...2");
+			if(accumTime > 3 && accumTime < 3.1)
+				System.out.println("Starting...3");
+			if(accumTime > 4 && accumTime < 4.1)
+				System.out.println("Starting...4");
+			if(accumTime > 5 && accumTime < 5.1)
+				System.out.println("Starting...5");
+			if(accumTime > 6 && accumTime < 6.1)
+				System.out.println("Starting...6");
+			if(accumTime > 7 && accumTime < 7.1)
+				System.out.println("Starting...7");
+			if(accumTime > 8 && accumTime < 8.1)
+				System.out.println("Starting...8");
+			if(accumTime > 9 && accumTime < 9.1)
+				System.out.println("Starting...9");
+			if(accumTime > 10 && accumTime < 10.1)
+			{
+				System.out.println("START!");
+				startGame = false;
+			}
 		}
 		
 		//-------------------Cannon Place------------------------------//
@@ -426,6 +427,8 @@ public class GameLoop
 		if(accumTime > 10 && accumTime < 20)
 		{
 			keyInput(window);
+			if(accumTime > 10 && accumTime < 10.1)
+				System.out.println("Ready the Cannons!");
 		}
 		
 		//--------------------Battle Phase-----------------------------//
@@ -433,6 +436,8 @@ public class GameLoop
 		if(accumTime > 20 && accumTime < 30)
 		{
 			keyInput(window); // scan for input
+			if(accumTime > 20 && accumTime < 20.1)
+				System.out.println("Destroy The Enamy!");
 			
 			debug.debugString("FIRE!");
 			// get start time for timing shooting. 
@@ -444,11 +449,21 @@ public class GameLoop
 			cannonShot();
 		}
 		
+		//--------------------Cleaning---------------------------------//
+		if(accumTime > 30 && accumTime < 30.2)
+		{
+			clean.clean();
+		}
+		
 		//--------------------Wall Build-------------------------------//
 		
 		if(accumTime > 30 && accumTime < 40)
 		{
 			keyInput(window); // scan for input
+			
+			if(accumTime > 30 && accumTime < 30.1)
+				System.out.println("Repair the Walls!");
+			
 			// checks if wall can be build
 			// blue
 			PlaceWall.checkForWall_B();
@@ -466,16 +481,84 @@ public class GameLoop
 			ff.floodFill();
 		}
 		
-		debug.debugString("Quit");
+		if(accumTime > 40 && accumTime < 41)
+		{
+			if(Blue.size() == 0)
+			{
+				debug.debugString("Blue Empty");
+				blueFailed = true;
+			}
+			if(Red.size() == 0)
+			{
+				debug.debugString("Red Empty");
+				redFailed = true;
+			}
+			if(Orange.size() == 0)
+			{
+				debug.debugString("Orange Empty");
+				orangeFailed = true;
+			}
+		}
+		
 		debug.debugLong(System.currentTimeMillis());;
 		
 		//---------------------End Game--------------------------------//
-		if(endGame)
+		if((blueFailed && redFailed && orangeFailed)|| (blueFailed && redFailed) || (blueFailed && orangeFailed) || (redFailed && orangeFailed) || (currentRound == 10))
 		{
+			// if time runs out or no one was able to block in their castles
+			// everyone loses
+			if((currentRound == 10) || (blueFailed && redFailed && orangeFailed))
+				System.out.println("Game Over: Everyone Loses");
+			
+			// if Orange wins
+			if((blueFailed && redFailed))
+			{
+				System.out.println("Orange Wins!");
+				
+				Cas_B.clear();
+				Wal_B.clear();
+				Blue.clear();
+				
+				Cas_R.clear();
+				Wal_R.clear();
+				Red.clear();
+			}
+			
+			// if red wins
+			if((blueFailed && orangeFailed))
+			{
+				System.out.println("Red Wins!");
+				
+				Cas_B.clear();
+				Wal_B.clear();
+				Blue.clear();
+				
+				Cas_O.clear();
+				Wal_O.clear();
+				Orange.clear();
+			}
+			
+			// if blue wins
+			if((redFailed && orangeFailed))
+			{
+				System.out.println("Blue Wins!");
+				
+				Cas_R.clear();
+				Wal_R.clear();
+				Red.clear();
+				
+				Cas_O.clear();
+				Wal_O.clear();
+				Orange.clear();
+			}
+			
 		}else
 		{
-			if (accumTime > 40)
-				accumTime = 0;		
+			if (accumTime > 41)
+			{
+				accumTime = 0;
+				currentRound++;
+			}		
 		}
 	}
 // -------------------------------------- END OF GAME LOOP ---------------------------------
