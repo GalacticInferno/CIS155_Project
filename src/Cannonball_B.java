@@ -21,14 +21,12 @@ int texture[] = new int[3];
     public int destination_x;
     public int destination_y;
     double  diagonal;
-    double xSpeed;
+    double xSpeed = 1;
     double ySpeed;
     int initCalc = 0;  // for initial direction calculation
     double totalDistance;
     double movSpeed = 1;
   
-
-	
 	public Cannonball_B (int x1 , int y1 , int sizex1, int sizey1)
 	{
 		x = x1;
@@ -57,13 +55,13 @@ int texture[] = new int[3];
 	
 	public void update()
 	{
-
+		calcMov(); // adjust movemnts
 		if ((x != destination_x && y != destination_y)) 
 		{
 			x -= xSpeed * movSpeed;
 			y -= ySpeed * movSpeed;
 			initCalc++; // disables initial distance calculation
-			calcMov();   // adjust direction
+			//calcMov();   // adjust direction
 		}
 		if (x == destination_x && y != destination_y)
 		{
