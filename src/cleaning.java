@@ -23,21 +23,21 @@ public class cleaning
 		
 		// Randomly selects a wall for deletion as long as list has elements and is no less than 6
 		// Blue
-		if(!GameLoop.Wal_B.isEmpty() && (GameLoop.Wal_B.size() > 6))
+		if(!GameLoop.Wal_B.isEmpty() && (GameLoop.Wal_B.size() > 8))
 		{
 			size = GameLoop.Wal_B.size();
 			blue = rdm.nextInt(size);
 			GameLoop.Wal_B.remove(blue);
 		}
 		// Red
-		if(!GameLoop.Wal_R.isEmpty() && (GameLoop.Wal_R.size() > 6))
+		if(!GameLoop.Wal_R.isEmpty() && (GameLoop.Wal_R.size() > 8))
 		{
 			size = GameLoop.Wal_R.size();
 			red = rdm.nextInt(GameLoop.Wal_R.size());
 			GameLoop.Wal_R.remove(red);
 		}
 		// Orange
-		if(!GameLoop.Wal_O.isEmpty() && (GameLoop.Wal_O.size() > 6))
+		if(!GameLoop.Wal_O.isEmpty() && (GameLoop.Wal_O.size() > 8))
 		{
 			size = GameLoop.Wal_O.size();
 			orange = rdm.nextInt(GameLoop.Wal_O.size());

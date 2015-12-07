@@ -469,6 +469,7 @@ public class GameLoop
 			
 			// cannon shooting 
 			cannonShot();
+			System.out.println("Fire!");
 		}
 		
 		//--------------------Cleaning---------------------------------//
@@ -972,7 +973,7 @@ public void cannonShot()
 			for (int i = 0; i < Cannonball_B.size() ; i++)
 			{
 				Cannonball_B.get(i).update();
-				System.out.println("xSpeed: " + Cannonball_B.get(i).xSpeed);
+				//System.out.println("xSpeed: " + Cannonball_B.get(i).xSpeed);
 			}
 			// removes the blue ball when target is hit
 			Cannonball_create.cannonball_B_remove(Cannonball_B.size());
