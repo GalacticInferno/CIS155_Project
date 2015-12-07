@@ -1,14 +1,8 @@
-<<<<<<< HEAD
+
 // Created by Cody Beaty
 // Checks and creates the area around a castle
 // throught the game
-=======
-import java.util.concurrent.TimeUnit;
 
-/**
- * 
- */
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 
 public class FloodFill 
 {
@@ -26,13 +20,10 @@ public class FloodFill
 	public static int roomWidth = 1280;
 	// screen height
 	public static int roomHeight = 869 + GameLoop.underBanner;
-<<<<<<< HEAD
-=======
 	
 	// field for flooding
-	private static int fieldWidth = roomWidth/blockSize;
-	private static int fieldHeight = roomHeight/blockSize;
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
+	//private static int fieldWidth = roomWidth/blockSize;
+	//private static int fieldHeight = roomHeight/blockSize;
 	
 	// Holds the state of blocks
 	// True = Flood-able
@@ -49,12 +40,9 @@ public class FloodFill
 	// Gets called from GameLoop
 	public void floodFill()
 	{
-<<<<<<< HEAD
-		// Creates a true/false map for flooding
-=======
+
 		db.debugString("flood_1");
-		
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
+
 		map();
 		
 		// Due to recursion, we have to clear the list if it gets to big
@@ -190,14 +178,12 @@ public class FloodFill
 		if(x > (roomWidth / 32))
 			return;
 		if(y > (roomHeight / 32))
-<<<<<<< HEAD
 			return;
 		
 		// checks to see if block has already been colored
 		if(!check[x][y])
-=======
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 			return;
+		
 		db.debugInt2(x, y);
 		
 		db.debugInt2(x, y);
@@ -217,26 +203,16 @@ public class FloodFill
 			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
-<<<<<<< HEAD
-=======
 			floodOrange = false;
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 			return;
 		}
 		
 		if(r > 70)
 		{
-<<<<<<< HEAD
-			while(!GameLoop.Red.isEmpty())
-			{
-				GameLoop.Red.clear();
-			}
-=======
 			GameLoop.Red.clear();
 			GameLoop.Red.clear();
 			GameLoop.Red.clear();
 			floodRed = false;
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 			return;
 		}
 		

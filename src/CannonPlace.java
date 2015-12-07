@@ -38,7 +38,6 @@ public class CannonPlace {
 		}
 		// checks for wall
 		public static void checkForWall_B() {
-			int test = 0;
 			if (GameLoop.Wal_B.size() == 0) {
 				placeCannon_B_1 = true;
 				placeCannon_B_2 = true;

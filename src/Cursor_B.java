@@ -43,8 +43,6 @@ public class Cursor_B
 	
 	public void update(int key)
 	{
-<<<<<<< HEAD
-=======
 		if(GameLoop.cannonPhase || GameLoop.buildPhase) {
 			 yTop = 96;
 			 yBottom = 544;
@@ -57,8 +55,8 @@ public class Cursor_B
 			xLeft = 16;
 			xRight = 1248;
 		}
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
-		Debug db = new Debug();
+		
+		//Debug db = new Debug();
 		
 		/*
 		 * KEY MAPP

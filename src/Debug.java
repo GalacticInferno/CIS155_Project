@@ -3,7 +3,7 @@
 // Would like to expand this class further for other projects
 public class Debug 
 {
-	private boolean debug = true;
+	private boolean debug = false;
 	
 	public void debugString(String s)
 	{

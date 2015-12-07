@@ -4,27 +4,16 @@
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 import java.util.Random;
-<<<<<<< HEAD
-=======
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 import java.util.ArrayList;
-
 import org.lwjgl.glfw.GLFWKeyCallback;
 
 
 public class GameLoop
 {	
 	//Game parameters
-<<<<<<< HEAD
+
 	private boolean startGame = true;
 	private boolean first = true;
 	private boolean blueFailed = false;
@@ -35,25 +24,18 @@ public class GameLoop
 	private double deltaTime;
 	private double accumTime = 0;
 	private int currentRound = 0;
-=======
-	static public boolean startGame = false;
+
 	static public boolean cannonPhase = false;
 	static public boolean battlePhase = false;
 	static public boolean buildPhase = false;
 	static public boolean endGame = false;
 	
-	private double fpsCounter = 0;
-	private double lastTime;
-	private double deltaTime;
-	private double accumTime = 0;
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
-	
 	Cannonball_create cannonball_create;
 	// creates input as a KeyEvent class
-	private int keyPressed = 0;
+	//private int keyPressed = 0;
 	
 	// TIMING MOVEMENT for ALL players 
-	// NOTE HERE: player moves every 0.25 second -- change movSpeed to change movement speed (for all players)
+	// NOTE HERE: player moves every 0.1 second -- change movSpeed to change movement speed (for all players)
 	int  movSpeed = 100;
 	long startTime_P1_move;
 	long endTime_P1_move = System.currentTimeMillis();
@@ -215,89 +197,14 @@ public class GameLoop
 		Banner.add(new Banner(0,0,0,0));
 		World.add(new World(0, 0 + underBanner, 0, 0));
 		
-<<<<<<< HEAD
-		Cas_B.add(new Castle_B(96, 160 + underBanner, 0, 0));
-		Cas_R.add(new Castle_R(960, 160 + underBanner, 0, 0));
-		Cas_O.add(new Castle_O(512, 512 + underBanner, 0, 0));
-		Can_B.add(new Cannon_B(256, 0 + underBanner, 0, 0));
-		Can_R.add(new Cannon_R(320, 0 + underBanner, 0, 0));
-		Can_O.add(new Cannon_O(384, 0 + underBanner, 0, 0));
-		
-		//Cursors
-		Cur_B.add(new Cursor_B(160, 64 + underBanner, 0, 0));
-		Cur_R.add(new Cursor_R(192, 64 + underBanner, 0, 0));
-		Cur_O.add(new Cursor_O(224, 64 + underBanner, 0, 0));
-=======
-		Wal_B.add(new Wall_B(0, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(32, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(96, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(64, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(128, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(160, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(192, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 96 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 128 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 160 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 192 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 224 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(224, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(192, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(160, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(128, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(96, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(64, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(32, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 256 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 224 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 192 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 160 + underBanner, 0, 0));
-		Wal_B.add(new Wall_B(0, 128 + underBanner, 0, 0));
-		
-		// test flood
-		//
-		int setRed = 960;
-		Wal_R.add(new Wall_R(0 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(32 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(96 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(64 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(128 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(160 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(192 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(224 + setRed, 96 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(224 + setRed, 128 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(224 + setRed, 160 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(224 + setRed, 192 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(224 + setRed, 224 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(224 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(192 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(160 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(128 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(96 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(64 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(32 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(0 + setRed, 256 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(0 + setRed, 224 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(0 + setRed, 192 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(0 + setRed, 160 + underBanner, 0, 0));
-		Wal_R.add(new Wall_R(0 + setRed, 128 + underBanner, 0, 0));
-		
-		//
-		
 		Cas_B.add(new Castle_B(128, 160 + underBanner, 0, 0));
 		Cas_R.add(new Castle_R(1088, 160 + underBanner, 0, 0));
 		Cas_O.add(new Castle_O(544, 640 + underBanner, 0, 0));
-		//Cas_N.add(new Castle_N(192, 0 + underBanner, 0, 0));
-		//Can_B.add(new Cannon_B(256, 0 + underBanner, 0, 0));
-		//Can_R.add(new Cannon_R(320, 0 + underBanner, 0, 0));
-		//Can_O.add(new Cannon_O(384, 0 + underBanner, 0, 0));
-		//Can_N.add(new Cannon_N(448, 0 + underBanner, 0, 0));
-		//Boat.add(new Boat_ai(512, 0 + underBanner, 0, 0));
 		
 		//Cursors
 		Cur_B.add(new Cursor_B(128, 160 + underBanner, 0, 0));
 		Cur_R.add(new Cursor_R(1088, 160 + underBanner, 0, 0));
 		Cur_O.add(new Cursor_O(544, 640 + underBanner, 0, 0));
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 	}
 
 	public void draw()
@@ -376,23 +283,6 @@ public class GameLoop
 		{
 			Can_N.get(i).draw();
 		}
-		
-		/*for(int i = 0; i<Blue.size(); i++)
-		{
-			Blue.get(i).draw();
-		}
-		for(int i = 0; i<Red.size(); i++)
-		{
-			Red.get(i).draw();
-		}
-		for(int i = 0; i<Orange.size(); i++)
-		{
-			Orange.get(i).draw();
-		}
-		for(int i = 0; i<Black.size(); i++)
-		{
-			Black.get(i).draw();
-		}*/
 		
 		//Draw all Blue Castles in list
 		for(int i = 0; i<Cas_B.size(); i++)
@@ -475,21 +365,18 @@ public class GameLoop
 	{	
 		FloodFill ff = new FloodFill();
 		Debug debug = new Debug();
-<<<<<<< HEAD
+
 		initWall iw = new initWall();
-		cleaning clean = new cleaning();
+		cleaning clean = new cleaning();;
 		
-		// Starts up thr timer which uses deltaTime
-=======
-		int fps;
-		
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
+
+		// Delta time used to calculate seconds
 		double currentTime = (double)System.currentTimeMillis() / 1000.0;
 		deltaTime =   currentTime - lastTime;
 		lastTime =  currentTime;
 		
 		accumTime += deltaTime;
-<<<<<<< HEAD
+
 		
 		debug.debugDoubleWithString(accumTime, "accumTime:");
 		debug.debugDoubleWithString(deltaTime, "deltaTime:");
@@ -502,11 +389,11 @@ public class GameLoop
 				// start count down
 			if(first)
 			{
-				System.out.println("Starting...9");
+				System.out.println("Starting...5");
 				
 				iw.wallCas(Cas_B.get(0).x, Cas_B.get(0).y, 1);
 				iw.wallCas(Cas_R.get(0).x, Cas_B.get(0).y, 2);
-				iw.wallCas(512, (512 + underBanner), 3);
+				iw.wallCas(Cas_O.get(0).x, Cas_O.get(0).y, 3);
 				
 				ff.floodFill();
 				
@@ -514,94 +401,28 @@ public class GameLoop
 			}
 				
 			if(accumTime > 2 && accumTime < 2.1)
-				System.out.println("Starting...8");
-			if(accumTime > 3 && accumTime < 3.1)
-				System.out.println("Starting...7");
-			if(accumTime > 4 && accumTime < 4.1)
-				System.out.println("Starting...6");
-			if(accumTime > 5 && accumTime < 5.1)
-				System.out.println("Starting...5");
-			if(accumTime > 6 && accumTime < 6.1)
 				System.out.println("Starting...4");
-			if(accumTime > 7 && accumTime < 7.1)
+			if(accumTime > 3 && accumTime < 3.1)
 				System.out.println("Starting...3");
-			if(accumTime > 8 && accumTime < 8.1)
+			if(accumTime > 4 && accumTime < 4.1)
 				System.out.println("Starting...2");
-			if(accumTime > 9 && accumTime < 9.1)
+			if(accumTime > 5 && accumTime < 5.1)
 				System.out.println("Starting...1");
-			if(accumTime > 10 && accumTime < 10.1)
+			if(accumTime > 5.1 && accumTime < 5.2)
 			{
 				System.out.println("START!");
 				startGame = false;
 			}
-		}
-		
-		//-------------------Cannon Place------------------------------//
-		// Between 10s and 20s
-		if(accumTime > 10 && accumTime < 20)
-		{
-			keyInput(window);
-			if(accumTime > 10 && accumTime < 10.1)
-				System.out.println("Ready the Cannons!");
-		}
-		
-		//--------------------Battle Phase-----------------------------//
-		// Between 20s and 30s
-		if(accumTime > 20 && accumTime < 30)
-		{
-			keyInput(window); // scan for input
-			if(accumTime > 20 && accumTime < 20.1)
-				System.out.println("Destroy The Enamy!");
-			
-			debug.debugString("FIRE!");
-			// get start time for timing shooting. 
-			Cannonball_create.startTime_P1_ball = System.currentTimeMillis();
-			Cannonball_create.startTime_P2_ball = System.currentTimeMillis();
-			Cannonball_create.startTime_P3_ball = System.currentTimeMillis();
-			
-			// cannon shooting 
-			cannonShot();
-		}
-		
-		//--------------------Cleaning---------------------------------//
-		if(accumTime > 30 && accumTime < 30.2)
-		{
-			// Removes randomly selected walls
-			clean.clean();
-		}
-		
-		//--------------------Wall Build-------------------------------//
-		
-		if(accumTime > 30 && accumTime < 40)
-		{
-			keyInput(window); // scan for input
-			
-			if(accumTime > 30 && accumTime < 30.1)
-				System.out.println("Repair the Walls!");
-			
-=======
-		//debug.debugDoubleWithString(fps, "fps:");
-		
-		fps = (int) (1.0 / deltaTime);
-		
-		fpsCounter += fps;
-		debug.debugInt(fps);
-		
-		debug.debugDoubleWithString(fpsCounter, "fpsCounter:");
-		debug.debugDoubleWithString(accumTime, "accumTime:");
-		debug.debugDoubleWithString(deltaTime, "deltaTime:");
-		keyInput(window);
-		//----------------Select First Castle -------------------------//
-		if(startGame)
-		{
-			
-		}
+		}	
 		
 		//-------------------Cannon Place------------------------------//
 		
 		if(accumTime > 5 && accumTime < 20)
 		{
-			if(accumTime > 5 && accumTime < 5.1) {
+			
+			if(accumTime > 5 && accumTime < 5.1) 
+			{
+				System.out.println("Ready the Cannons!");
 				Cur_B.get(0).setX(128);
 				Cur_B.get(0).setY(160 + underBanner);
 				Cur_R.get(0).setX(1088);
@@ -625,7 +446,7 @@ public class GameLoop
 			buildPhase = false;
 			endGame = false;
 			
-			//keyInput(window);
+			keyInput(window);
 			CannonPlace.checkCannon_collision();
 
 		}
@@ -640,9 +461,7 @@ public class GameLoop
 			battlePhase = true;
 			buildPhase = false;
 			endGame = false;
-			//keyInput(window); // scan for input
 			
-			debug.debugString("FIRE!");
 			// get start time for timing shooting. 
 			Cannonball_create.startTime_P1_ball = System.currentTimeMillis();
 			Cannonball_create.startTime_P2_ball = System.currentTimeMillis();
@@ -652,12 +471,20 @@ public class GameLoop
 			cannonShot();
 		}
 		
+		//--------------------Cleaning---------------------------------//
+		
+		if(accumTime > 35 && accumTime < 36)
+		{
+			// Removes randomly selected walls and destrpyed walls
+			clean.clean();
+		}
+				
 		//--------------------Wall Build-------------------------------//
 		
-		if(accumTime > 35 && accumTime < 65)
+		if(accumTime > 36 && accumTime < 66)
 		{	
-			remove_destoryed_wall();
-			if(accumTime > 35 && accumTime < 35.01) {
+			if(accumTime > 36 && accumTime < 36.01) {
+				System.out.println("Repair the Walls!");
 				Cur_B.get(0).setX(128);
 				Cur_B.get(0).setY(160 + underBanner);
 				Cur_R.get(0).setX(1088);
@@ -668,14 +495,15 @@ public class GameLoop
 				RmdBuild.rmd_wall_R();
 				RmdBuild.rmd_wall_O();
 				
-				/* if (ff.floodOnce == false) {
+				if (ff.floodOnce == false) 
+				{
 					ff.floodFill();
 					ff.floodBlue = true;
 					ff.floodOrange = true;
 					ff.floodRed = true;
-				} */
+				} 
 			}
-			if(accumTime > 35.1 && accumTime < 35.2) {
+			if(accumTime > 36.1 && accumTime < 36.2) {
 				if (ff.floodOnce == false) {
 					ff.floodFill();
 					ff.floodBlue = true;
@@ -693,7 +521,6 @@ public class GameLoop
 			endGame = false;
 			
 			//keyInput(window); // scan for input
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
 			// checks if wall can be build
 			// blue
 			PlaceWall.checkForWall_B();
@@ -708,12 +535,11 @@ public class GameLoop
 			PlaceWall.checkForCannon_O();
 			PlaceWall.checkForCastle_O();
 			
-<<<<<<< HEAD
 			ff.floodFill();
 		}
 		
 		// Checks to see if any players have failed to reclaim their areas
-		if(accumTime > 40 && accumTime < 41)
+		if(accumTime > 66 && accumTime < 67)
 		{
 			if(Blue.isEmpty())
 			{
@@ -751,10 +577,14 @@ public class GameLoop
 				Cas_B.clear();
 				Wal_B.clear();
 				Blue.clear();
+				Cur_B.clear();
+				Can_B.clear();
 				
 				Cas_R.clear();
 				Wal_R.clear();
 				Red.clear();
+				Cur_R.clear();
+				Can_R.clear();
 			}
 			
 			// if red wins
@@ -765,10 +595,14 @@ public class GameLoop
 				Cas_B.clear();
 				Wal_B.clear();
 				Blue.clear();
+				Cur_B.clear();
+				Can_B.clear();
 				
 				Cas_O.clear();
 				Wal_O.clear();
 				Orange.clear();
+				Cur_O.clear();
+				Can_O.clear();
 			}
 			
 			// if blue wins
@@ -779,46 +613,40 @@ public class GameLoop
 				Cas_R.clear();
 				Wal_R.clear();
 				Red.clear();
+				Cur_R.clear();
+				Can_R.clear();
 				
 				Cas_O.clear();
 				Wal_O.clear();
 				Orange.clear();
+				Cur_O.clear();
+				Can_O.clear();
 			}
 			
 		}else
 		{
 			// If failure Conditions are not met
-			if (accumTime > 41)
+			if (accumTime > 67)
 			{
 				accumTime = 0;
 				currentRound++;
+				
+				accumTime = 0;
+				cannonPhase = false;
+				startGame = false;
+				battlePhase = false;
+				buildPhase = false;
+				endGame = false;
+				// remove build
+				RmdBuild.remove_Build();
 			}		
-=======
 			//ff.floodFill();
 		}
 		
 		debug.debugString("Quit");
 		debug.debugLong(System.currentTimeMillis());;
-		
-		//---------------------End Game--------------------------------//
-		if(endGame)
-		{
-			
-		}else
-		{
-			if (accumTime > 65) {
-				accumTime = 0;
-			cannonPhase = false;
-			startGame = false;
-			battlePhase = false;
-			buildPhase = false;
-			endGame = false;
-			// remove build
-			RmdBuild.remove_Build();
-			}
->>>>>>> refs/remotes/origin/Markus_final_release_v1.0
-		}
 	}
+	
 // -------------------------------------- END OF GAME LOOP ---------------------------------
 // Scan input for all Players.
 void keyInput(long window) {
@@ -1179,18 +1007,6 @@ void checkMov() {
 		if (Bil_B.size() > 0) {
 			
 		}
-	}
-}
-////// ADD class for checkfor wall build wall for all players.
-void remove_destoryed_wall() {
-	for (int i = 0; i < Wal_D.size(); i++) {
-		Wal_D.remove(i);
-	}
-	for (int i = 0; i < Wal_D.size(); i++) {
-		Wal_D.remove(i);
-	}
-	for (int i = 0; i < Wal_D.size(); i++) {
-		Wal_D.remove(i);
 	}
 }
 }

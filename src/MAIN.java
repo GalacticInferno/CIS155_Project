@@ -1,3 +1,7 @@
+// Game created by:
+// Cody Beaty
+// Markus
+// Andrew
 
 //This Starts The application
 public class MAIN 
