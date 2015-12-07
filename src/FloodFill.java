@@ -1,13 +1,7 @@
-import java.util.concurrent.TimeUnit;
+// Created by Cody Beaty
+// Checks and creates the area around a castle
+// throught the game
 
-/**
- * 
- */
-
-/**
- * @author Cody
- *
- */
 public class FloodFill 
 {
 	// Holds blocks in the x and y (grid = blocks)

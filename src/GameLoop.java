@@ -8,11 +8,6 @@ import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -27,7 +22,6 @@ public class GameLoop
 	private boolean redFailed = false;
 	private boolean orangeFailed = false;
 	
-	private double fpsCounter = 0;
 	private double lastTime;
 	private double deltaTime;
 	private double accumTime = 0;
@@ -373,8 +367,8 @@ public class GameLoop
 		Debug debug = new Debug();
 		initWall iw = new initWall();
 		cleaning clean = new cleaning();
-		//int fps;
 		
+		// Starts up thr timer which uses deltaTime
 		double currentTime = (double)System.currentTimeMillis() / 1000.0;
 		deltaTime =   currentTime - lastTime;
 		lastTime =  currentTime;
@@ -383,12 +377,16 @@ public class GameLoop
 		
 		debug.debugDoubleWithString(accumTime, "accumTime:");
 		debug.debugDoubleWithString(deltaTime, "deltaTime:");
-		//----------------Select First Castle -------------------------//
+		//----------------Start----------------------------//
 		if(startGame)
 		{	
+			// on the first run through
+				// draw the first walls
+				// claim the first zones
+				// start count down
 			if(first)
 			{
-				System.out.println("Starting...1");
+				System.out.println("Starting...9");
 				
 				iw.wallCas(Cas_B.get(0).x, Cas_B.get(0).y, 1);
 				iw.wallCas(Cas_R.get(0).x, Cas_B.get(0).y, 2);
@@ -400,21 +398,21 @@ public class GameLoop
 			}
 				
 			if(accumTime > 2 && accumTime < 2.1)
-				System.out.println("Starting...2");
+				System.out.println("Starting...8");
 			if(accumTime > 3 && accumTime < 3.1)
-				System.out.println("Starting...3");
+				System.out.println("Starting...7");
 			if(accumTime > 4 && accumTime < 4.1)
-				System.out.println("Starting...4");
+				System.out.println("Starting...6");
 			if(accumTime > 5 && accumTime < 5.1)
 				System.out.println("Starting...5");
 			if(accumTime > 6 && accumTime < 6.1)
-				System.out.println("Starting...6");
+				System.out.println("Starting...4");
 			if(accumTime > 7 && accumTime < 7.1)
-				System.out.println("Starting...7");
+				System.out.println("Starting...3");
 			if(accumTime > 8 && accumTime < 8.1)
-				System.out.println("Starting...8");
+				System.out.println("Starting...2");
 			if(accumTime > 9 && accumTime < 9.1)
-				System.out.println("Starting...9");
+				System.out.println("Starting...1");
 			if(accumTime > 10 && accumTime < 10.1)
 			{
 				System.out.println("START!");
@@ -423,7 +421,7 @@ public class GameLoop
 		}
 		
 		//-------------------Cannon Place------------------------------//
-		
+		// Between 10s and 20s
 		if(accumTime > 10 && accumTime < 20)
 		{
 			keyInput(window);
@@ -432,7 +430,7 @@ public class GameLoop
 		}
 		
 		//--------------------Battle Phase-----------------------------//
-		
+		// Between 20s and 30s
 		if(accumTime > 20 && accumTime < 30)
 		{
 			keyInput(window); // scan for input
@@ -452,6 +450,7 @@ public class GameLoop
 		//--------------------Cleaning---------------------------------//
 		if(accumTime > 30 && accumTime < 30.2)
 		{
+			// Removes randomly selected walls
 			clean.clean();
 		}
 		
@@ -481,19 +480,20 @@ public class GameLoop
 			ff.floodFill();
 		}
 		
+		// Checks to see if any players have failed to reclaim their areas
 		if(accumTime > 40 && accumTime < 41)
 		{
-			if(Blue.size() == 0)
+			if(Blue.isEmpty())
 			{
 				debug.debugString("Blue Empty");
 				blueFailed = true;
 			}
-			if(Red.size() == 0)
+			if(Red.isEmpty())
 			{
 				debug.debugString("Red Empty");
 				redFailed = true;
 			}
-			if(Orange.size() == 0)
+			if(Orange.isEmpty())
 			{
 				debug.debugString("Orange Empty");
 				orangeFailed = true;
@@ -503,6 +503,7 @@ public class GameLoop
 		debug.debugLong(System.currentTimeMillis());;
 		
 		//---------------------End Game--------------------------------//
+		// Failure Conditions
 		if((blueFailed && redFailed && orangeFailed)|| (blueFailed && redFailed) || (blueFailed && orangeFailed) || (redFailed && orangeFailed) || (currentRound == 10))
 		{
 			// if time runs out or no one was able to block in their castles
@@ -554,6 +555,7 @@ public class GameLoop
 			
 		}else
 		{
+			// If failure Conditions are not met
 			if (accumTime > 41)
 			{
 				accumTime = 0;
