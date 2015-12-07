@@ -1,3 +1,4 @@
+// by markus tamm
 import java.util.Random;
 public class RmdBuild {
 	public static int curX_B;
@@ -29,7 +30,7 @@ public class RmdBuild {
 	{
 		//rmdGen = new Random();
 	}
-	
+	// create random blue wall
 	public static void rmd_wall_B() {
 		curX_B = GameLoop.Cur_B.get(0).getX();
 		curY_B = GameLoop.Cur_B.get(0).getY();
@@ -114,9 +115,11 @@ public class RmdBuild {
 		//System.out.println(rmdLocation3);
 		
 	}
+	// pass back 
 	public static int getBil_B() {
 		return rmdLocation1_B;
 	}
+	// random wall red
 	public static void rmd_wall_R() {
 		curX_R = GameLoop.Cur_R.get(0).getX();
 		curY_R = GameLoop.Cur_R.get(0).getY();
@@ -197,6 +200,7 @@ public class RmdBuild {
 		//System.out.println(rmdLocation3);
 		
 	}
+	// random wall orange
 	public static void rmd_wall_O() {
 		curX_O = GameLoop.Cur_O.get(0).getX();
 		curY_O = GameLoop.Cur_O.get(0).getY();
@@ -276,5 +280,49 @@ public class RmdBuild {
 		//System.out.println(rmdLocation2);
 		//System.out.println(rmdLocation3);
 		
+	}
+	// remove build if not needed
+	public static void remove_Build() {
+		// remove blue build
+		for (int i = 0; i < GameLoop.Bil_B.size(); i++) 
+		{
+			GameLoop.Bil_B.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_B.size(); i++) 
+		{
+			GameLoop.Bil_B.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_B.size(); i++) 
+		{
+			GameLoop.Bil_B.remove(i);
+		}
+		// remove red build
+		for (int i = 0; i < GameLoop.Bil_R.size(); i++) 
+		{
+			GameLoop.Bil_R.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_R.size(); i++) 
+		{
+			GameLoop.Bil_R.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_R.size(); i++) 
+		{
+			GameLoop.Bil_R.remove(i);
+		}
+		// remove orange build
+		for (int i = 0; i < GameLoop.Bil_O.size(); i++) 
+		{
+			GameLoop.Bil_O.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_O.size(); i++) 
+		{
+			GameLoop.Bil_O.remove(i);
+		}
+		for (int i = 0; i < GameLoop.Bil_O.size(); i++) 
+		{
+			GameLoop.Bil_O.remove(i);
+		}
+		
+	
 	}
 }

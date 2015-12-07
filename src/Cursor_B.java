@@ -20,8 +20,8 @@ public class Cursor_B
     public int sizey;
 	public int keyPressed;
 	public int moveSpeed = 32;
-	public int yTop = 16;
-	public int yBottom = 864;
+	public int yTop = 96;
+	public int yBottom = 960;
 	public int xLeft = 16;
 	public int xRight = 1248;
 	public int wallX;
@@ -43,7 +43,20 @@ public class Cursor_B
 	
 	public void update(int key)
 	{
-		Debug db = new Debug();
+		if(GameLoop.cannonPhase || GameLoop.buildPhase) {
+			 yTop = 96;
+			 yBottom = 544;
+			 xLeft = 16;
+			 xRight = 608;
+		}
+		else {
+			yTop = 96;
+			yBottom = 960;
+			xLeft = 16;
+			xRight = 1248;
+		}
+		
+		//Debug db = new Debug();
 		
 		/*
 		 * KEY MAPP
@@ -162,6 +175,12 @@ public class Cursor_B
 	}
 	public int getY() {
 		return y;
+	}
+	public void setX(int setX) {
+		 x = setX;
+	}
+	public void setY(int setY) {
+	y = setY;
 	}
 	public void setWallX(int x) {
 		wallX = x;

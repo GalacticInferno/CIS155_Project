@@ -1,4 +1,4 @@
-
+// by Markus Tamm
 public class PlaceWall {
 	// checks for wall
 	public static boolean placeWall_B = true;   
@@ -96,7 +96,7 @@ public static void placewall_B() {
 				
 			
 				if( (GameLoop.Bil_B.get(i).getX() < GameLoop.Cas_B.get(j).getX() || GameLoop.Bil_B.get(i).getX() > GameLoop.Cas_B.get(j).getX() + 63) &&
-						(GameLoop.Bil_B.get(i).getY() < GameLoop.Can_B.get(j).getY() || GameLoop.Bil_B.get(i).getY() > GameLoop.Can_B.get(j).getY() + 63	)) 
+						(GameLoop.Bil_B.get(i).getY() < GameLoop.Cas_B.get(j).getY() || GameLoop.Bil_B.get(i).getY() > GameLoop.Cas_B.get(j).getY() + 63	)) 
 				{
 					placeWall_B_Ca = true;
 				}
@@ -195,7 +195,7 @@ public static void placewall_B() {
 					
 				
 					if( (GameLoop.Bil_R.get(i).getX() < GameLoop.Cas_R.get(j).getX() || GameLoop.Bil_R.get(i).getX() > GameLoop.Cas_R.get(j).getX() + 63) &&
-							(GameLoop.Bil_R.get(i).getY() < GameLoop.Can_R.get(j).getY() || GameLoop.Bil_R.get(i).getY() > GameLoop.Can_R.get(j).getY() + 63	)) 
+							(GameLoop.Bil_R.get(i).getY() < GameLoop.Cas_R.get(j).getY() || GameLoop.Bil_R.get(i).getY() > GameLoop.Cas_R.get(j).getY() + 63	)) 
 					{
 						placeWall_R_Ca = true;
 					}
@@ -285,7 +285,7 @@ public static void placewall_O() {
 						
 					
 						if( (GameLoop.Bil_O.get(i).getX() < GameLoop.Cas_O.get(j).getX() || GameLoop.Bil_O.get(i).getX() > GameLoop.Cas_O.get(j).getX() + 63) &&
-								(GameLoop.Bil_O.get(i).getY() < GameLoop.Can_O.get(j).getY() || GameLoop.Bil_O.get(i).getY() > GameLoop.Can_O.get(j).getY() + 63	)) 
+								(GameLoop.Bil_O.get(i).getY() < GameLoop.Cas_O.get(j).getY() || GameLoop.Bil_O.get(i).getY() > GameLoop.Cas_O.get(j).getY() + 63	)) 
 						{
 							placeWall_O_Ca = true;
 						}

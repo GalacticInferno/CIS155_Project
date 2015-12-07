@@ -52,13 +52,13 @@ int texture[] = new int[3];
 	
 	public void update()
 	{
-
+		calcMov(); // adjust movement
 		if ((x != destination_x && y != destination_y)) 
 		{
 			x -= xSpeed * movSpeed;
 			y -= ySpeed * movSpeed;
 			initCalc++; // disables initial distance calculation
-			calcMov();   // adjust direction
+			//calcMov();   // adjust direction
 		}
 		if (x == destination_x && y != destination_y)
 		{

@@ -1,9 +1,15 @@
+
 // Created by Cody Beaty
 // Checks and creates the area around a castle
 // throught the game
 
+
 public class FloodFill 
 {
+	public boolean floodOnce = false;
+	public boolean floodBlue = true;
+	public boolean floodRed = true;
+	public boolean floodOrange = true;
 	// Holds blocks in the x and y (grid = blocks)
 	private static int blockX;
 	private static int blockY;
@@ -14,6 +20,10 @@ public class FloodFill
 	public static int roomWidth = 1280;
 	// screen height
 	public static int roomHeight = 869 + GameLoop.underBanner;
+	
+	// field for flooding
+	//private static int fieldWidth = roomWidth/blockSize;
+	//private static int fieldHeight = roomHeight/blockSize;
 	
 	// Holds the state of blocks
 	// True = Flood-able
@@ -30,7 +40,9 @@ public class FloodFill
 	// Gets called from GameLoop
 	public void floodFill()
 	{
-		// Creates a true/false map for flooding
+
+		db.debugString("flood_1");
+
 		map();
 		
 		// Due to recursion, we have to clear the list if it gets to big
@@ -51,6 +63,7 @@ public class FloodFill
 		blueFlood();
 		orangeFlood();
 		redFlood();
+		floodOnce = true;
 	}
 	
 	// Generates the true/false map
@@ -170,14 +183,18 @@ public class FloodFill
 		// checks to see if block has already been colored
 		if(!check[x][y])
 			return;
+		
 		db.debugInt2(x, y);
 		
+		db.debugInt2(x, y);
+			
 		// Clears drawing if its not contained in walls
 		if(b > 70)
 		{			
 			GameLoop.Blue.clear();
 			GameLoop.Blue.clear();
 			GameLoop.Blue.clear();
+			floodBlue = false;
 			return;
 		}
 		
@@ -186,43 +203,57 @@ public class FloodFill
 			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
 			GameLoop.Orange.clear();
+			floodOrange = false;
 			return;
 		}
 		
 		if(r > 70)
 		{
-			while(!GameLoop.Red.isEmpty())
-			{
-				GameLoop.Red.clear();
-			}
+			GameLoop.Red.clear();
+			GameLoop.Red.clear();
+			GameLoop.Red.clear();
+			floodRed = false;
 			return;
 		}
+		
+		// checks to see if block has already been colored
+		if(!check[x][y])
+			return;
 		
 		// Draw depending on which castle is calling  the method
 		// Recursion !!!
 		
 		switch(c)
-		{
-			case 1: GameLoop.Blue.add(new B(x * blockSize, y * blockSize, 0, 0));
+		{	
+			case 1: 
+				if ( floodBlue == true) {
+				GameLoop.Blue.add(new B(x * blockSize, y * blockSize, 0, 0));
 						check[x][y] = false; 
-						flood((x - 1) * blockSize, y * blockSize, c, ++b, o, r);
-						flood((x + 1) * blockSize, y * blockSize, c, ++b, o, r);
-						flood(x * blockSize, (y - 1) * blockSize, c, ++b, o, r);
-						flood(x * blockSize, (y + 1) * blockSize, c, ++b, o, r);
+							flood((x - 1) * blockSize, y * blockSize, c, ++b, o, r);
+							flood((x + 1) * blockSize, y * blockSize, c, ++b, o, r);
+							flood(x * blockSize, (y - 1) * blockSize, c, ++b, o, r);
+							flood(x * blockSize, (y + 1) * blockSize, c, ++b, o, r);
+				}
 						break;
-			case 2: GameLoop.Orange.add(new O(x * blockSize, y * blockSize, 0, 0));
-						check[x][y] = false; 
-						flood((x - 1) * blockSize, y * blockSize, c, b, ++o, r);
-						flood((x + 1) * blockSize, y * blockSize, c, b, ++o, r);
-						flood(x * blockSize, (y - 1) * blockSize, c, b, ++o, r);
-						flood(x * blockSize, (y + 1) * blockSize, c, b, ++o, r);
+			case 2:
+				if ( floodOrange == true) {
+					GameLoop.Orange.add(new O(x * blockSize, y * blockSize, 0, 0));
+							check[x][y] = false; 
+							flood((x - 1) * blockSize, y * blockSize, c, b, ++o, r);
+							flood((x + 1) * blockSize, y * blockSize, c, b, ++o, r);
+							flood(x * blockSize, (y - 1) * blockSize, c, b, ++o, r);
+							flood(x * blockSize, (y + 1) * blockSize, c, b, ++o, r);
+				}
 						break;
-			case 3: GameLoop.Red.add(new R(x * blockSize, y * blockSize, 0, 0));
-						check[x][y] = false; 
-						flood((x - 1) * blockSize, y * blockSize, c, b, o, ++r);
-						flood((x + 1) * blockSize, y * blockSize, c, b, o, ++r);
-						flood(x * blockSize, (y - 1) * blockSize, c, b, o, ++r);
-						flood(x * blockSize, (y + 1) * blockSize, c, b, o, ++r);
+			case 3: 
+				if ( floodRed == true) {
+					GameLoop.Red.add(new R(x * blockSize, y * blockSize, 0, 0));
+							check[x][y] = false; 
+							flood((x - 1) * blockSize, y * blockSize, c, b, o, ++r);
+							flood((x + 1) * blockSize, y * blockSize, c, b, o, ++r);
+							flood(x * blockSize, (y - 1) * blockSize, c, b, o, ++r);
+							flood(x * blockSize, (y + 1) * blockSize, c, b, o, ++r);
+				}
 						break;
 		}
 	}
